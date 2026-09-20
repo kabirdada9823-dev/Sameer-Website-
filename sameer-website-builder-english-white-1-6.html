@@ -1,0 +1,2181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sameer Website Builders</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#FFFFFF;
+    --ink-soft:#4A5170;
+    --paper:#FFFFFF;
+    --paper-raised:#FAF9F2;
+    --marigold:#FFFFFF;
+    --marigold-deep:#333333;
+    --teal:#333333;
+    --line:#DCD8C6;
+    --danger:#B5453A;
+    --radius-card:4px;
+    --admin-bg:#F5F5F7;
+    --admin-panel:#FFFFFF;
+    --admin-line:#E4E4E8;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Arial','Noto Sans',sans-serif;
+    line-height:1.6;
+    min-height:100vh;
+  }
+  h1,h2,h3,.serif{font-family:'Noto Serif Devanagari','Arial',serif;font-weight:600;margin:0;color:var(--ink);}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  input,textarea,select{font-family:inherit;}
+  #app{max-width:960px;margin:0 auto;}
+  #publicWrap{max-width:920px;margin:0 auto;padding:0 20px 100px;}
+
+  /* Public header */
+  header.masthead{
+    padding:20px 20px;
+    border-bottom:3px solid var(--ink);
+    margin-bottom:28px;
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    max-width:920px;margin-left:auto;margin-right:auto;
+  }
+  header.masthead .brand{font-size:26px;font-weight:700;}
+  header.masthead .brand span{color:var(--marigold-deep);}
+  header.masthead .tagline{font-size:12px;color:var(--ink-soft);}
+  .admin-link{
+    background:none;border:1px solid var(--line);color:var(--ink-soft);
+    font-size:12px;padding:6px 12px;border-radius:20px;
+  }
+  .admin-link:hover{border-color:var(--ink);color:var(--ink);}
+  .admin-link.is-active{border-color:var(--teal);color:var(--teal);}
+
+  .section-label{font-size:13px;color:var(--ink-soft);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .public-search-row{margin:20px 0 24px;}
+  .public-search-row input{
+    width:100%;padding:12px 16px;border:1px solid var(--line);border-radius:24px;
+    font-size:15px;background:var(--paper-raised);color:var(--ink);
+  }
+  .public-search-row input:focus{outline:2px solid var(--marigold-deep);outline-offset:1px;}
+  .section-label::after{content:"";flex:1;height:1px;background:var(--line);}
+  .empty{text-align:center;padding:50px 20px;color:var(--ink-soft);border:1px dashed var(--line);border-radius:var(--radius-card);}
+
+  .post-head{margin-bottom:8px;}
+  .chip-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px;}
+  .chip{display:inline-block;font-size:12px;color:var(--teal);border:1px solid var(--teal);padding:3px 10px;border-radius:20px;}
+  .chip.category{color:var(--marigold-deep);border-color:var(--marigold-deep);}
+  .chip.label{color:var(--ink-soft);border-color:var(--line);}
+  .post-head h1{font-size:28px;line-height:1.4;margin:10px 0;}
+  .post-meta-row{font-size:13px;color:var(--ink-soft);display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
+  .post-image{width:100%;max-height:340px;object-fit:cover;border-radius:var(--radius-card);margin:14px 0;display:block;}
+  .rte-content{color:var(--ink-soft);font-size:15.5px;max-width:75ch;}
+  .rte-content h1,.rte-content h2,.rte-content h3{color:var(--ink);margin:16px 0 8px;}
+  .rte-content p{margin:0 0 10px;}
+  .rte-content ul,.rte-content ol{margin:0 0 10px;padding-left:22px;}
+  .rte-content blockquote{
+    border-left:3px solid var(--marigold-deep);
+    margin:14px 0;padding:6px 0 6px 14px;color:var(--ink);font-style:italic;
+  }
+  .rte-content a{color:var(--teal);text-decoration:underline;}
+  .rte-content img{max-width:100%;border-radius:3px;margin:8px 0;}
+  .rte-content hr{border:none;border-top:1px solid var(--line);margin:18px 0;}
+
+  .item-list{margin-top:28px;display:flex;flex-direction:column;gap:14px;}
+  .post-block{margin-bottom:12px;}
+  .post-divider{border:none;border-top:1px dashed var(--line);margin:44px 0;}
+  .item{display:flex;gap:16px;background:var(--paper-raised);border:1px solid var(--line);border-radius:var(--radius-card);padding:18px;align-items:flex-start;box-shadow:0 1px 3px rgba(27,35,64,0.06);}
+  .item .rank{font-family:'Noto Serif Devanagari',serif;font-size:30px;font-weight:700;color:var(--marigold-deep);min-width:44px;}
+  .item-image{width:72px;height:72px;object-fit:cover;border-radius:3px;border:1px solid var(--line);flex-shrink:0;}
+  .item .item-body{flex:1;}
+  .item .item-body h3{font-size:17px;margin-bottom:4px;}
+  .item .item-body h3 a:hover{color:var(--marigold-deep);text-decoration:underline;}
+  .item .item-body .price{color:var(--teal);font-weight:600;font-size:14px;margin-bottom:6px;}
+  .item .item-body p{margin:0 0 8px;color:var(--ink-soft);font-size:14.5px;}
+  .buy-btn{display:inline-block;font-size:12.5px;font-weight:600;color:#fff;background:var(--marigold-deep);padding:6px 14px;border-radius:20px;}
+  .buy-btn:hover{background:#9C6C14;}
+  .related-placeholder{
+    margin-top:30px;padding:20px;border:1px dashed var(--line);border-radius:var(--radius-card);
+    text-align:center;color:var(--ink-soft);font-size:13px;
+  }
+
+  /* Comments */
+  .comments-block{margin-top:30px;border-top:1px solid var(--line);padding-top:20px;}
+  .comments-block h3{font-size:16px;margin-bottom:14px;}
+  .comment-item{border-bottom:1px dashed var(--line);padding:10px 0;}
+  .comment-item .c-name{font-weight:600;font-size:14px;}
+  .comment-item .c-date{font-size:11px;color:var(--ink-soft);margin-left:8px;}
+  .comment-item .c-text{font-size:14px;color:var(--ink-soft);margin-top:4px;}
+  .comment-form input,.comment-form textarea{
+    width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:3px;margin-top:8px;font-size:14px;
+  }
+  .comment-form button{margin-top:10px;}
+
+  .fab{
+    position:fixed;right:24px;bottom:24px;background:var(--ink);color:#fff;border:none;border-radius:30px;
+    padding:14px 22px;font-size:14.5px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,0.25);
+    display:flex;align-items:center;gap:8px;z-index:40;
+  }
+  .fab:hover{background:var(--marigold-deep);}
+  .loading{padding:60px 0;text-align:center;color:var(--ink-soft);}
+
+  @media (max-width:520px){
+    .item{flex-direction:column;}
+    .item-image{width:100%;height:180px;}
+    .fab{right:16px;bottom:16px;padding:12px 18px;}
+  }
+
+  /* ================= ADMIN SHELL ================= */
+  #adminLayout{display:none;}
+  .admin-body{background:var(--admin-bg);min-height:100vh;}
+  .admin-header{
+    background:var(--ink);color:#fff;height:56px;display:flex;align-items:center;
+    padding:0 14px;gap:14px;position:sticky;top:0;z-index:50;
+  }
+  .admin-header .icon-btn{
+    background:none;border:none;color:#fff;font-size:19px;padding:6px;border-radius:6px;line-height:1;
+  }
+  .admin-header .icon-btn:hover{background:rgba(255,255,255,0.12);}
+  .admin-header .admin-logo{font-weight:700;font-size:16px;flex:1;}
+  .admin-header .admin-logo span{color:var(--marigold);}
+  .admin-header-actions{display:flex;gap:4px;align-items:center;position:relative;}
+  .account-menu{
+    position:absolute;top:46px;right:0;background:#fff;color:var(--ink);border:1px solid var(--admin-line);
+    border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,0.18);min-width:170px;display:none;overflow:hidden;z-index:60;
+  }
+  .account-menu.open{display:block;}
+  .account-menu .am-item{padding:11px 14px;font-size:13.5px;cursor:pointer;border-bottom:1px solid var(--admin-line);}
+  .account-menu .am-item:last-child{border-bottom:none;}
+  .account-menu .am-item:hover{background:var(--admin-bg);}
+
+  .admin-shell{display:flex;min-height:calc(100vh - 56px);}
+  .admin-drawer{
+    width:230px;background:#fff;border-right:1px solid var(--admin-line);flex-shrink:0;
+    padding:14px 0;
+  }
+  .admin-drawer .drawer-item{
+    display:flex;align-items:center;gap:10px;padding:11px 20px;font-size:14px;color:var(--ink-soft);
+    cursor:pointer;border-left:3px solid transparent;
+  }
+  .admin-drawer .drawer-item:hover{background:var(--admin-bg);color:var(--ink);}
+  .admin-drawer .drawer-item.active{border-left-color:var(--marigold-deep);color:var(--ink);font-weight:600;background:var(--admin-bg);}
+  .admin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:45;}
+  .admin-main{flex:1;padding:22px;min-width:0;}
+  .admin-main h1.page-title{font-size:21px;margin-bottom:18px;}
+
+  @media (max-width:860px){
+    .admin-drawer{position:fixed;top:56px;left:0;bottom:0;transform:translateX(-100%);transition:transform .2s ease;z-index:55;}
+    .admin-drawer.open{transform:translateX(0);}
+    .admin-overlay.open{display:block;}
+    .admin-main{padding:16px;}
+  }
+
+  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(130px,1fr));gap:12px;margin-bottom:22px;}
+  .stat-card{background:#fff;border:1px solid var(--admin-line);border-radius:8px;padding:16px;text-align:center;}
+  .stat-card .num{font-family:'Noto Serif Devanagari',serif;font-size:26px;font-weight:700;color:var(--marigold-deep);display:block;}
+  .stat-card .label{font-size:12px;color:var(--ink-soft);margin-top:4px;}
+  .quick-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px;}
+
+  .btn{padding:10px 20px;border-radius:6px;border:none;font-size:14px;font-weight:600;}
+  .btn-primary{background:var(--marigold-deep);color:#fff;}
+  .btn-primary:hover{background:#9C6C14;}
+  .btn-teal{background:var(--teal);color:#fff;}
+  .btn-teal:hover{background:#254F45;}
+  .btn-ghost{background:#fff;border:1px solid var(--admin-line);color:var(--ink-soft);}
+  .btn-ghost:hover{color:var(--ink);border-color:var(--ink);}
+  .btn-danger{background:none;border:1px solid var(--danger);color:var(--danger);}
+  .btn-danger:hover{background:rgba(181,69,58,0.08);}
+  .btn-sm{padding:6px 12px;font-size:12.5px;border-radius:5px;}
+
+  .toolbar-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px;background:#fff;border:1px solid var(--admin-line);border-radius:8px;padding:12px;}
+  .toolbar-row input[type=text],.toolbar-row select{padding:8px 10px;border:1px solid var(--admin-line);border-radius:5px;font-size:13.5px;}
+
+  .post-row{
+    display:flex;gap:14px;background:#fff;border:1px solid var(--admin-line);border-radius:8px;padding:14px;margin-bottom:10px;align-items:center;flex-wrap:wrap;
+  }
+  .post-row .row-thumb{width:56px;height:56px;border-radius:5px;object-fit:cover;background:var(--admin-bg);flex-shrink:0;border:1px solid var(--admin-line);}
+  .post-row .row-info{flex:1;min-width:180px;}
+  .post-row .row-title{font-weight:600;font-size:14.5px;margin-bottom:4px;}
+  .post-row .row-meta{font-size:12px;color:var(--ink-soft);display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .status-badge{font-size:11px;padding:2px 9px;border-radius:20px;font-weight:600;}
+  .status-badge.published{background:rgba(47,111,98,0.12);color:var(--teal);}
+  .status-badge.draft{background:rgba(181,69,58,0.1);color:var(--danger);}
+  .status-badge.scheduled{background:rgba(185,130,26,0.14);color:var(--marigold-deep);}
+  .row-actions{display:flex;gap:6px;flex-wrap:wrap;}
+
+  .form-card{background:#fff;border:1px solid var(--admin-line);border-radius:8px;padding:22px;max-width:520px;}
+  .form-card h2{font-size:17px;margin-bottom:14px;}
+  label{display:block;font-size:13px;color:var(--ink-soft);margin-bottom:6px;margin-top:14px;}
+  input[type=text],input[type=url],input[type=password],input[type=date],textarea,select{
+    width:100%;padding:9px 11px;border:1px solid var(--admin-line);border-radius:5px;background:#fff;font-size:14.5px;color:var(--ink);
+  }
+  textarea{resize:vertical;min-height:60px;}
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--marigold-deep);outline-offset:1px;}
+  .toggle-row{display:flex;align-items:center;gap:10px;margin-top:14px;}
+  .toggle-row input{width:auto;}
+
+  .category-add-row{display:flex;gap:8px;margin-top:8px;max-width:420px;}
+  .category-add-row input{flex:1;}
+  .category-list{margin-top:18px;display:flex;flex-direction:column;gap:8px;max-width:420px;}
+  .category-row{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid var(--admin-line);border-radius:6px;padding:10px 14px;}
+  .category-row .cat-count{font-size:12px;color:var(--ink-soft);margin-left:8px;}
+
+  /* Editor */
+  .editor-topbar{
+    background:#fff;border-bottom:1px solid var(--admin-line);padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:56px;z-index:30;
+  }
+  .editor-title-input{
+    flex:1;min-width:160px;border:none;font-size:19px;font-family:'Noto Serif Devanagari',serif;font-weight:600;padding:6px 2px;outline:none;background:transparent;
+  }
+  .editor-topbar-actions{display:flex;gap:8px;flex-wrap:wrap;}
+  .save-status{font-size:12px;color:var(--ink-soft);padding:0 4px;}
+  .rte-toolbar{
+    display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto;background:#fff;border-bottom:1px solid var(--admin-line);
+    padding:8px 12px;position:sticky;top:106px;z-index:29;-webkit-overflow-scrolling:touch;
+  }
+  .rte-toolbar::-webkit-scrollbar{height:4px;}
+  .rte-toolbar button, .rte-toolbar select{
+    flex-shrink:0;background:#fff;border:1px solid var(--admin-line);color:var(--ink-soft);
+    font-size:13px;padding:7px 10px;border-radius:5px;min-height:34px;
+  }
+  .rte-toolbar button:hover{border-color:var(--marigold-deep);color:var(--ink);}
+  .rte-toolbar input[type=color]{flex-shrink:0;width:34px;height:34px;padding:2px;border:1px solid var(--admin-line);border-radius:5px;}
+  .rte-toolbar .sep{width:1px;background:var(--admin-line);margin:0 4px;flex-shrink:0;}
+  .editor-body-wrap{padding:20px 16px 100px;max-width:820px;margin:0 auto;}
+  .editor-canvas{
+    background:#fff;border:1px solid var(--admin-line);border-radius:8px;min-height:400px;padding:22px;
+    font-size:15.5px;line-height:1.8;outline:none;
+  }
+  .editor-canvas:empty:before{content:attr(data-placeholder);color:#9C9CA8;}
+  .editor-canvas h1{font-size:24px;margin:14px 0 8px;}
+  .editor-canvas h2{font-size:20px;margin:12px 0 8px;}
+  .editor-canvas h3{font-size:17px;margin:10px 0 6px;}
+  .editor-canvas blockquote{border-left:3px solid var(--marigold-deep);margin:12px 0;padding:4px 0 4px 14px;font-style:italic;}
+  .editor-canvas img{max-width:100%;border-radius:4px;}
+  .editor-canvas iframe{max-width:100%;}
+
+  .settings-panel-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:70;}
+  .settings-panel-overlay.open{display:block;}
+  .settings-panel{
+    position:fixed;top:0;right:0;bottom:0;width:340px;max-width:92vw;background:#fff;z-index:71;
+    transform:translateX(100%);transition:transform .2s ease;overflow-y:auto;padding:18px;
+  }
+  .settings-panel.open{transform:translateX(0);}
+  .settings-panel h2{font-size:17px;margin-bottom:4px;}
+  .settings-panel .sp-close{float:right;background:none;border:none;font-size:20px;color:var(--ink-soft);}
+  .product-row{border:1px dashed var(--admin-line);border-radius:6px;padding:12px;margin-top:12px;position:relative;}
+  .product-row .p-num{font-size:11px;color:var(--marigold-deep);font-weight:700;margin-bottom:4px;}
+  .remove-product{position:absolute;top:8px;right:8px;background:none;border:none;color:var(--danger);font-size:12px;}
+  .add-product-btn{margin-top:10px;background:none;border:1px dashed var(--ink-soft);color:var(--ink-soft);padding:9px;width:100%;border-radius:5px;font-size:13px;}
+  .img-preview{max-width:140px;max-height:140px;margin-top:8px;border-radius:4px;border:1px solid var(--admin-line);display:block;object-fit:cover;}
+
+  /* Media library */
+  .media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:16px;}
+  .media-tile{position:relative;border:1px solid var(--admin-line);border-radius:6px;overflow:hidden;background:#fff;}
+  .media-tile img{width:100%;height:90px;object-fit:cover;display:block;}
+  .media-tile .m-size{font-size:10px;color:var(--ink-soft);padding:4px 6px;}
+  .media-tile .m-del{position:absolute;top:4px;right:4px;background:rgba(181,69,58,0.9);color:#fff;border:none;border-radius:4px;font-size:11px;padding:2px 6px;}
+
+  .media-picker-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:80;align-items:center;justify-content:center;padding:20px;}
+  .media-picker-overlay.open{display:flex;}
+  .media-picker-box{background:#fff;border-radius:10px;max-width:600px;width:100%;max-height:80vh;overflow-y:auto;padding:20px;}
+  .media-pick-tile{cursor:pointer;}
+  .media-pick-tile:hover{outline:2px solid var(--marigold-deep);}
+
+  .toast{
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;
+    padding:11px 20px;border-radius:24px;font-size:13.5px;z-index:90;opacity:0;pointer-events:none;transition:opacity .25s ease;
+  }
+  .toast.show{opacity:1;}
+
+  @media (max-width:600px){
+    .rte-toolbar{top:98px;}
+  }
+</style>
+
+<style id="phase-enhancements">
+/* Phase 1–4 usability and accessibility enhancements */
+:focus-visible{outline:3px solid var(--marigold);outline-offset:3px}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.admin-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.admin-toolbar input,.admin-toolbar select{min-height:42px;border:1px solid var(--admin-line);border-radius:10px;padding:8px 12px;background:#fff}
+.editor-status{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#4b5563}
+.editor-status.saved{color:var(--teal)}
+.editor-status.unsaved{color:var(--danger)}
+.phase-notice{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper-raised);margin:12px 0}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
+.kpi-card{padding:16px;border:1px solid var(--admin-line);border-radius:14px;background:#fff}
+.kpi-card strong{display:block;font-size:28px;line-height:1.2}
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:600px){.admin-toolbar>*{width:100%}}
+</style>
+
+
+<style id="sameer-white-theme">
+:root{
+  --paper:#FFFFFF!important;
+  --paper-raised:#FFFFFF!important;
+  --cream:#FFFFFF!important;
+  --navy:#FFFFFF!important;
+  --gold:#333333!important;
+  --marigold:#333333!important;
+  --teal:#333333!important;
+  --ink:#111111!important;
+  --muted:#666666!important;
+  --line:#E5E5E5!important;
+  --admin-line:#E5E5E5!important;
+  --danger:#B42318!important;
+}
+html,body{background:#FFFFFF!important;color:#111111!important}
+header,nav,main,section,article,aside,.card,.post-card,.admin-shell,.admin-header,
+.admin-drawer,.modal,.panel,.kpi-card,.editor-panel,.toolbar,.product-card{
+  background:#FFFFFF!important;
+  color:#111111!important;
+}
+button,.btn,.buy-btn,.admin-btn{background:#FFFFFF!important;color:#111111!important;border:1px solid #D6D6D6!important}
+a{color:#222222!important}
+input,textarea,select,[contenteditable="true"]{background:#FFFFFF!important;color:#111111!important;border:1px solid #D6D6D6!important}
+img{background:#FFFFFF}
+</style>
+
+<style id="dark-mode-theme">
+body.dark-mode{
+  --ink:#F1F1F1!important;
+  --ink-soft:#B5BAC9!important;
+  --paper:#14151A!important;
+  --paper-raised:#1D1F26!important;
+  --marigold:#F1F1F1!important;
+  --marigold-deep:#8FB8FF!important;
+  --teal:#8FB8FF!important;
+  --line:#2B2D36!important;
+  --danger:#FF6B6B!important;
+  --admin-bg:#101114!important;
+  --admin-panel:#1D1F26!important;
+  --admin-line:#2E313B!important;
+}
+body.dark-mode{background:#14151A!important;color:#F1F1F1!important}
+body.dark-mode :is(header,nav,main,section,article,aside,.card,.post-card,.admin-shell,.admin-header,.admin-drawer,.modal,.panel,.kpi-card,.editor-panel,.toolbar,.product-card,.item,.settings-panel,.media-picker-box,.comments-block,.comment-form){
+  background:#1D1F26!important;
+  color:#F1F1F1!important;
+}
+body.dark-mode :is(button,.btn,.buy-btn,.admin-btn,.icon-toggle-btn,.admin-link){background:#242631!important;color:#F1F1F1!important;border:1px solid #34374A!important}
+body.dark-mode a{color:#9CC2FF!important}
+body.dark-mode :is(input,textarea,select,[contenteditable="true"]){background:#1D1F26!important;color:#F1F1F1!important;border:1px solid #34374A!important}
+body.dark-mode img{background:#1D1F26}
+body.dark-mode .wish-heart{background:rgba(29,31,38,0.9)!important;}
+</style>
+
+<style id="feature-additions">
+.header-actions{display:flex;align-items:center;gap:10px;}
+.icon-toggle-btn{background:none;border:1px solid var(--line);color:var(--ink-soft);font-size:14px;padding:6px 10px;border-radius:20px;}
+.icon-toggle-btn:hover{border-color:var(--ink);color:var(--ink);}
+.wishlist-btn-wrap{position:relative;}
+.wishlist-count{position:absolute;top:-6px;right:-6px;background:var(--danger);color:#fff;font-size:10px;min-width:16px;height:16px;line-height:16px;border-radius:8px;text-align:center;padding:0 3px;}
+.item{position:relative;}
+.wish-heart{position:absolute;top:10px;right:10px;background:rgba(255,255,255,0.9);border:1px solid var(--line);border-radius:50%;width:32px;height:32px;font-size:15px;display:flex;align-items:center;justify-content:center;line-height:1;padding:0;}
+.wish-heart.active{color:var(--danger);border-color:var(--danger);}
+.share-row{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;}
+.share-btn{font-size:12.5px;padding:7px 13px;border-radius:20px;border:1px solid var(--line);background:none;color:var(--ink-soft);}
+.share-btn:hover{border-color:var(--ink);color:var(--ink);}
+.wishlist-page-item{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);}
+.wishlist-page-item img{width:56px;height:56px;object-fit:cover;border-radius:6px;flex-shrink:0;}
+.wishlist-page-item .wpi-body{flex:1;min-width:0;}
+.wishlist-page-item .wpi-body h4{margin:0 0 2px;font-size:14.5px;}
+.wishlist-empty{padding:40px 0;text-align:center;color:var(--ink-soft);}
+@media(max-width:600px){.header-actions{gap:6px;}.icon-toggle-btn{font-size:13px;padding:6px 9px;}}
+</style>
+
+</head>
+<body>
+<div id="app">
+  <header class="masthead" id="siteHeader">
+    <div>
+      <div class="brand">Sameer <span>Website Builders</span></div>
+      <div class="tagline" id="siteTagline">The best budget picks, listed</div>
+    </div>
+    <div class="header-actions">
+      <button id="darkModeBtn" class="icon-toggle-btn" title="Toggle dark mode">🌙</button>
+      <button id="wishlistBtn" class="icon-toggle-btn wishlist-btn-wrap" title="Wishlist" data-action="go-wishlist">❤️<span class="wishlist-count" id="wishlistCount" style="display:none;">0</span></button>
+      <button id="adminBtn" class="admin-link">Admin Login</button>
+    </div>
+  </header>
+
+  <main id="publicWrap">
+    <div class="loading">Loading…</div>
+  </main>
+
+  <div id="adminLayout">
+    <div class="admin-body">
+      <header class="admin-header">
+        <button class="icon-btn" id="adminBackOrMenu">☰</button>
+        <div class="admin-logo">Sameer <span>Website Builders</span> · Admin</div>
+        <div class="admin-header-actions">
+          <button class="icon-btn" id="helpIconBtn" title="Help">❓</button>
+          <div style="position:relative;">
+            <button class="icon-btn" id="accountIconBtn" title="Account">👤</button>
+            <div class="account-menu" id="accountMenu">
+              <div class="am-item" data-action="nav-settings">⚙️ Settings</div>
+              <div class="am-item" data-action="logout">🚪 Logout</div>
+            </div>
+          </div>
+          <button class="icon-btn" id="settingsIconBtn" title="Settings" data-action="nav-settings">⚙️</button>
+        </div>
+      </header>
+      <div class="admin-shell">
+        <div class="admin-overlay" id="adminOverlay"></div>
+        <nav class="admin-drawer" id="adminDrawer"></nav>
+        <main class="admin-main" id="adminMain"></main>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="fab" id="fabBtn" style="display:none;">+ Admin Panel</button>
+<div class="toast" id="toast"></div>
+
+<div class="settings-panel-overlay" id="spOverlay"></div>
+<div class="settings-panel" id="settingsPanel"></div>
+
+<div class="media-picker-overlay" id="mediaPickerOverlay">
+  <div class="media-picker-box" id="mediaPickerBox"></div>
+</div>
+
+
+<script>
+/* Compatibility layer: Cloud AI storage when available, browser storage otherwise. */
+(function(){
+  if(!window.storage){
+    const prefix = 'sameer-website-builder:';
+    window.storage = {
+      async get(key){
+        const value = localStorage.getItem(prefix + key);
+        return value === null ? null : { value };
+      },
+      async set(key, value){
+        localStorage.setItem(prefix + key, value);
+        return { ok:true };
+      },
+      async delete(key){
+        localStorage.removeItem(prefix + key);
+        return { ok:true };
+      }
+    };
+  }
+})();
+</script>
+
+<script>
+/* ===================== STATE ===================== */
+const STORAGE_KEY = 'posts';
+const CATEGORY_KEY = 'categories';
+const MEDIA_KEY = 'media';
+const SETTINGS_KEY = 'site-settings';
+const PASSWORD_KEY = 'admin-password';
+const DEFAULT_PASSWORD = 'SameeR 1421';
+
+let posts = [];
+let categories = [];
+let media = [];
+let siteSettings = { authorName: 'Sameer Website Builder Team', tagline: 'The best budget picks, listed' };
+let adminPassword = DEFAULT_PASSWORD;
+let isAdmin = false;
+let currentView = 'home';
+let editorPost = null;
+let editorIsNew = true;
+let editorLastSaved = null;
+let productRowCount = 0;
+let postsFilter = { search:'', status:'all', category:'', sort:'newest' };
+let adminPostsPage = 1;
+const ADMIN_PAGE_SIZE = 8;
+let homeSearchQuery = '';
+let homePage = 1;
+const HOME_PAGE_SIZE = 5;
+let savedRange = null;
+let mediaPickerTarget = null; /* 'canvas' | 'featured' | 'product:ID' */
+let slugManuallyEdited = false;
+let wishlist = [];
+
+/* ===================== UTIL ===================== */
+function uid(prefix){ return (prefix||'id') + '_' + Date.now() + '_' + Math.random().toString(36).slice(2,7); }
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str == null ? '' : String(str);
+  return div.innerHTML;
+}
+function nl2br(text){ return escapeHtml(text).replace(/\n/g,'<br>'); }
+
+/* ===================== DARK MODE ===================== */
+function initDarkMode(){
+  const saved = localStorage.getItem('sameer-website-builder:darkMode');
+  if(saved === '1') document.body.classList.add('dark-mode');
+  updateDarkModeBtn();
+}
+function toggleDarkMode(){
+  document.body.classList.toggle('dark-mode');
+  localStorage.setItem('sameer-website-builder:darkMode', document.body.classList.contains('dark-mode') ? '1' : '0');
+  updateDarkModeBtn();
+}
+function updateDarkModeBtn(){
+  const btn = document.getElementById('darkModeBtn');
+  if(btn) btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+}
+
+/* ===================== WISHLIST ===================== */
+async function loadWishlist(){
+  try{
+    const res = await window.storage.get('wishlist');
+    wishlist = res ? JSON.parse(res.value) : [];
+  }catch(e){ wishlist = []; }
+  updateWishlistCount();
+}
+async function saveWishlistData(){
+  try{ await window.storage.set('wishlist', JSON.stringify(wishlist)); }catch(e){}
+  updateWishlistCount();
+}
+function wishKey(postId, idx){ return postId + '::' + idx; }
+function isWished(postId, idx){ return wishlist.some(w => w.key === wishKey(postId, idx)); }
+async function toggleWish(postId, idx, name, price, image){
+  const key = wishKey(postId, idx);
+  const existingIdx = wishlist.findIndex(w => w.key === key);
+  const wasWished = existingIdx >= 0;
+  if(wasWished){ wishlist.splice(existingIdx, 1); }
+  else{ wishlist.push({key, postId, idx, name, price, image}); }
+  await saveWishlistData();
+  document.querySelectorAll(`[data-wish-key="${key}"]`).forEach(h => {
+    h.classList.toggle('active', !wasWished);
+    h.textContent = !wasWished ? '❤️' : '🤍';
+  });
+  if(currentView === 'wishlist') renderWishlistPage();
+}
+function updateWishlistCount(){
+  const el = document.getElementById('wishlistCount');
+  if(!el) return;
+  if(wishlist.length){ el.style.display = 'inline-block'; el.textContent = wishlist.length; }
+  else{ el.style.display = 'none'; }
+}
+function renderWishlistPage(){
+  currentView = 'wishlist';
+  document.getElementById('adminLayout').style.display = 'none';
+  document.getElementById('publicWrap').style.display = 'block';
+  document.getElementById('siteHeader').style.display = 'flex';
+  const wrap = document.getElementById('publicWrap');
+  const items = wishlist.map(w => `
+    <div class="wishlist-page-item">
+      ${w.image ? `<img src="${w.image}" alt="${escapeHtml(w.name)}">` : ''}
+      <div class="wpi-body">
+        <h4>${escapeHtml(w.name)}</h4>
+        <div class="price">${escapeHtml(w.price)}</div>
+      </div>
+      <button class="btn btn-ghost btn-sm" data-action="remove-wish" data-post-id="${w.postId}" data-idx="${w.idx}" data-name="${escapeHtml(w.name)}" data-price="${escapeHtml(w.price)}" data-image="${w.image || ''}">Remove</button>
+    </div>`).join('');
+  wrap.innerHTML = `
+    <button class="btn btn-ghost btn-sm" style="margin:20px 0;" data-action="go-public">← Back to Home</button>
+    <h1>My Wishlist</h1>
+    ${wishlist.length ? items : '<div class="wishlist-empty">Your wishlist is empty. Tap the ❤️ on any product to save it here.</div>'}
+  `;
+  window.scrollTo(0,0);
+}
+
+/* ===================== SHARE ===================== */
+function getShareUrl(postId){
+  return window.location.href.split('#')[0] + '#post-' + postId;
+}
+function copyShareLink(url){
+  const finish = () => showToast('Link copied ✓');
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(finish).catch(finish);
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = url; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta);
+    finish();
+  }
+}
+function nativeShare(title, url){
+  if(navigator.share){
+    navigator.share({ title, url }).catch(() => {});
+  } else {
+    copyShareLink(url);
+  }
+}
+function renderShareRow(p){
+  const url = getShareUrl(p.id);
+  const title = escapeHtml(p.title);
+  return `
+    <div class="share-row">
+      <button class="share-btn" data-action="share-native" data-title="${title}" data-url="${url}">📤 Share</button>
+      <button class="share-btn" data-action="share-whatsapp" data-title="${title}" data-url="${url}">WhatsApp</button>
+      <button class="share-btn" data-action="share-twitter" data-title="${title}" data-url="${url}">X / Twitter</button>
+      <button class="share-btn" data-action="share-facebook" data-title="${title}" data-url="${url}">Facebook</button>
+      <button class="share-btn" data-action="share-copy" data-url="${url}">🔗 Copy Link</button>
+    </div>
+  `;
+}
+
+function slugify(text){
+  return (text||'').trim().toLowerCase()
+    .replace(/[^\u0900-\u097Fa-z0-9\s-]/g,'')
+    .replace(/\s+/g,'-')
+    .replace(/-+/g,'-');
+}
+
+function fmtDate(iso){
+  if(!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleDateString('hi-IN', {day:'numeric', month:'short', year:'numeric'});
+}
+function fmtDateTime(iso){
+  if(!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleTimeString('hi-IN', {hour:'numeric', minute:'2-digit'});
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function fileToDataURL(file){
+  return new Promise((resolve, reject) => {
+    if(!file){ resolve(null); return; }
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function approxSize(dataUrl){
+  if(!dataUrl) return '0 KB';
+  const bytes = Math.round((dataUrl.length * 3) / 4 / 1024);
+  return bytes > 1024 ? (bytes/1024).toFixed(1) + ' MB' : bytes + ' KB';
+}
+
+/* ===================== SEED DATA ===================== */
+function seedPosts(){
+  return [
+    {
+      id: uid('p'), title: 'Top 5 Best Smartphones Under ₹10,000', slug:'10000-se-kam-me-5-best-smartphone',
+      category:'Smartphones', labels:['Smartphones','Budget','Gadgets'], tag:'Under ₹10,000',
+      author: siteSettings.authorName, status:'published', scheduledDate:null,
+      seoTitle:'Top 5 Best Smartphones Under ₹10,000 (2026)',
+      seoDescription:'A list of the top 5 smartphones offering a good camera, battery and performance on a budget.',
+      commentsEnabled:true, featuredImage:null,
+      content:'<p>If you want a good camera, battery and performance on a budget, be sure to check out these five phones.</p>',
+      date:new Date(Date.now()-86400000*2).toISOString(), updatedDate:null, views:0,
+      items:[
+        {name:'Redmi 13C', price:'Starting at ₹8,999', desc:'Big battery and smooth display — a reliable choice for everyday use.', image:null, affiliateLink:''},
+        {name:'realme Narzo N55', price:'Starting at ₹9,499', desc:'Fast charging and a clean design — a stylish look on a budget.', image:null, affiliateLink:''},
+        {name:'POCO C65', price:'Starting at ₹7,999', desc:'Big screen and a decent camera — good enough for gaming too.', image:null, affiliateLink:''},
+        {name:'Samsung Galaxy M14', price:'Starting at ₹9,999', desc:'Samsung’s trusted build quality and long software support.', image:null, affiliateLink:''},
+        {name:'Infinix Smart 8', price:'Starting at ₹6,999', desc:'The most affordable option, great for basic use.', image:null, affiliateLink:''}
+      ]
+    },
+    {
+      id: uid('p'), title: 'Top 5 Best Smartwatches Under ₹2,500', slug:'2500-se-kam-me-5-best-smartwatch',
+      category:'Smartwatches', labels:['Smartwatches','Budget'], tag:'Under ₹2,500',
+      author: siteSettings.authorName, status:'published', scheduledDate:null,
+      seoTitle:'Top 5 Best Smartwatches Under ₹2,500 (2026)',
+      seoDescription:'A list of the best budget smartwatches for fitness tracking and notifications.',
+      commentsEnabled:true, featuredImage:null,
+      content:'<p>Looking for a budget smartwatch for fitness tracking and notifications? Check out these options.</p>',
+      date:new Date(Date.now()-86400000).toISOString(), updatedDate:null, views:0,
+      items:[
+        {name:'Noise ColorFit Pulse', price:'Starting at ₹1,499', desc:'Big display and an easy interface — right for getting started.', image:null, affiliateLink:''},
+        {name:'boAt Wave Lite', price:'Starting at ₹1,299', desc:'Lightweight with long battery life.', image:null, affiliateLink:''},
+        {name:'Fire-Boltt Ninja', price:'Starting at ₹999', desc:'The cheapest option, for basic fitness tracking.', image:null, affiliateLink:''},
+        {name:'pTron Force X10', price:'Starting at ₹1,199', desc:'Sporty design with multiple sports modes.', image:null, affiliateLink:''},
+        {name:'Zebronics Zeb-Fit 1220', price:'Starting at ₹1,799', desc:'With a calling feature — extra function on a budget.', image:null, affiliateLink:''}
+      ]
+    }
+  ];
+}
+
+/* ===================== LOAD / SAVE ===================== */
+async function loadAll(){
+  try{
+    const res = await window.storage.get(STORAGE_KEY, true);
+    posts = res ? JSON.parse(res.value) : null;
+  }catch(e){ posts = null; }
+
+  try{
+    const sres = await window.storage.get(SETTINGS_KEY, true);
+    if(sres) siteSettings = Object.assign(siteSettings, JSON.parse(sres.value));
+  }catch(e){}
+
+  if(!posts || !Array.isArray(posts) || posts.length === 0){
+    posts = seedPosts();
+    await savePosts();
+  } else {
+    let migrated = false;
+    posts.forEach(p => {
+      if(p.content === undefined){
+        p.content = p.intro ? `<p>${escapeHtml(p.intro).replace(/\n/g,'</p><p>')}</p>` : '';
+        migrated = true;
+      }
+      if(p.status === undefined){ p.status = 'published'; migrated = true; }
+      if(p.views === undefined){ p.views = 0; migrated = true; }
+      if(p.labels === undefined){ p.labels = []; migrated = true; }
+      if(p.author === undefined){ p.author = siteSettings.authorName; migrated = true; }
+      if(p.commentsEnabled === undefined){ p.commentsEnabled = true; migrated = true; }
+      if(p.slug === undefined){ p.slug = slugify(p.title); migrated = true; }
+      (p.items||[]).forEach(it => { if(it.affiliateLink === undefined) it.affiliateLink = ''; });
+    });
+    if(migrated) await savePosts();
+  }
+
+  try{
+    const cres = await window.storage.get(CATEGORY_KEY, true);
+    categories = cres ? JSON.parse(cres.value) : null;
+  }catch(e){ categories = null; }
+  if(!categories || !Array.isArray(categories) || categories.length === 0){
+    categories = ['Smartphones','Smartwatches','Earbuds','Laptops'];
+    await saveCategories();
+  }
+
+  try{
+    const mres = await window.storage.get(MEDIA_KEY, true);
+    media = mres ? JSON.parse(mres.value) : [];
+  }catch(e){ media = []; }
+
+  try{
+    const pres = await window.storage.get(PASSWORD_KEY, true);
+    if(pres && pres.value) adminPassword = pres.value;
+  }catch(e){}
+
+  checkScheduledPosts();
+  countViewsOnce();
+  document.getElementById('siteTagline').textContent = siteSettings.tagline;
+  await loadWishlist();
+  initDarkMode();
+  renderHome();
+}
+
+async function savePosts(){
+  try{ await window.storage.set(STORAGE_KEY, JSON.stringify(posts), true); return true; }
+  catch(e){ console.error(e); return false; }
+}
+async function saveCategories(){
+  try{ await window.storage.set(CATEGORY_KEY, JSON.stringify(categories), true); return true; }
+  catch(e){ console.error(e); return false; }
+}
+async function saveMedia(){
+  try{ await window.storage.set(MEDIA_KEY, JSON.stringify(media), true); return true; }
+  catch(e){ console.error(e); return false; }
+}
+async function saveSettings(){
+  try{ await window.storage.set(SETTINGS_KEY, JSON.stringify(siteSettings), true); return true; }
+  catch(e){ console.error(e); return false; }
+}
+async function savePasswordToStorage(){
+  try{ await window.storage.set(PASSWORD_KEY, adminPassword, true); return true; }
+  catch(e){ console.error(e); return false; }
+}
+
+function checkScheduledPosts(){
+  const now = Date.now();
+  let changed = false;
+  posts.forEach(p => {
+    if(p.status === 'scheduled' && p.scheduledDate && new Date(p.scheduledDate).getTime() <= now){
+      p.status = 'published';
+      changed = true;
+    }
+  });
+  if(changed) savePosts();
+}
+
+function countViewsOnce(){
+  let changed = false;
+  posts.forEach(p => {
+    if(p.status === 'published'){ p.views = (p.views||0) + 1; changed = true; }
+  });
+  if(changed) savePosts();
+}
+
+/* ===================== RICH TEXT RENDER HELPERS ===================== */
+function sanitizeHtml(html){
+  if(!html) return '';
+  const allowedTags = ['P','BR','B','STRONG','I','EM','U','S','STRIKE','H1','H2','H3','UL','OL','LI','BLOCKQUOTE','HR','A','IMG','IFRAME','SPAN','DIV','FONT'];
+  const allowedAttrs = {
+    A:['href','target','rel'], IMG:['src','alt'],
+    IFRAME:['src','width','height','frameborder','allowfullscreen'],
+    SPAN:['style'], FONT:['color','size'], DIV:['style'],
+    P:['style'], H1:['style'], H2:['style'], H3:['style']
+  };
+  let doc;
+  try{ doc = new DOMParser().parseFromString(html, 'text/html'); }
+  catch(e){ return escapeHtml(html); }
+
+  function clean(node){
+    Array.from(node.childNodes).forEach(child => {
+      if(child.nodeType === 1){
+        const tag = child.tagName;
+        if(!allowedTags.includes(tag)){
+          if(['SCRIPT','STYLE','LINK','META','OBJECT','EMBED','FORM','INPUT','BUTTON'].includes(tag)){
+            child.remove(); return;
+          }
+          while(child.firstChild) node.insertBefore(child.firstChild, child);
+          node.removeChild(child);
+          return;
+        }
+        Array.from(child.attributes).forEach(attr => {
+          const name = attr.name.toLowerCase();
+          const allowed = allowedAttrs[tag] || [];
+          if(name.startsWith('on') || !allowed.includes(name)){ child.removeAttribute(attr.name); return; }
+          if((name === 'href' || name === 'src') && /^\s*javascript:/i.test(attr.value)){ child.removeAttribute(attr.name); }
+        });
+        if(tag === 'IFRAME'){
+          const src = child.getAttribute('src') || '';
+          if(!/^https:\/\/(www\.)?(youtube\.com\/embed\/|player\.vimeo\.com\/video\/)/.test(src)){ child.remove(); return; }
+        }
+        if(tag === 'A'){
+          if(!child.getAttribute('target')) child.setAttribute('target','_blank');
+          child.setAttribute('rel','noopener noreferrer');
+        }
+        clean(child);
+      } else if(child.nodeType === 8){
+        child.remove();
+      }
+    });
+  }
+  clean(doc.body);
+  return doc.body.innerHTML;
+}
+
+function renderProductsHtml(items, postId){
+  return (items||[]).map((it,i) => {
+    const nameHtml = it.affiliateLink
+      ? `<a href="${escapeHtml(it.affiliateLink)}" target="_blank" rel="nofollow sponsored noopener">${escapeHtml(it.name)}</a>`
+      : escapeHtml(it.name);
+    const key = wishKey(postId, i);
+    const wished = isWished(postId, i);
+    return `
+    <div class="item">
+      <div class="rank">${i+1}</div>
+      ${postId ? `<button class="wish-heart ${wished?'active':''}" data-wish-key="${key}" data-action="toggle-wish" data-post-id="${postId}" data-idx="${i}" data-name="${escapeHtml(it.name)}" data-price="${escapeHtml(it.price)}" data-image="${it.image || ''}" title="Save to wishlist">${wished?'❤️':'🤍'}</button>` : ''}
+      ${it.image ? `<img class="item-image" src="${it.image}" alt="${escapeHtml(it.name)}">` : ''}
+      <div class="item-body">
+        <h3>${nameHtml}</h3>
+        <div class="price">${escapeHtml(it.price)}</div>
+        <p>${nl2br(it.desc)}</p>
+        ${it.affiliateLink ? `<a class="buy-btn" href="${escapeHtml(it.affiliateLink)}" target="_blank" rel="nofollow sponsored noopener">Buy →</a>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderCommentsHtml(p){
+  if(!p.commentsEnabled) return '';
+  const list = ((window._commentsCache && window._commentsCache[p.id]) || []).filter(c => c.status === 'approved');
+  const items = list.map(c => `
+    <div class="comment-item">
+      <span class="c-name">${escapeHtml(c.name)}</span><span class="c-date">${fmtDate(c.date)}</span>
+      <div class="c-text">${escapeHtml(c.text)}</div>
+    </div>`).join('');
+  return `
+    <div class="comments-block" id="comments-${p.id}">
+      <h3>Comments (${list.length})</h3>
+      <div id="commentList-${p.id}">${items || '<div style="font-size:13px;color:var(--ink-soft);">No comments yet.</div>'}</div>
+      <div class="comment-form">
+        <input type="text" id="cName-${p.id}" placeholder="Your name">
+        <input type="text" id="cEmail-${p.id}" placeholder="Email (will not be public)">
+        <textarea id="cText-${p.id}" rows="2" placeholder="Write your comment..."></textarea>
+        <button class="btn btn-primary btn-sm" id="cSubmitBtn-${p.id}" data-action="submit-comment" data-post-id="${p.id}">Post</button>
+        <div id="cNote-${p.id}" style="font-size:12px;color:var(--ink-soft);margin-top:6px;"></div>
+      </div>
+    </div>
+  `;
+}
+
+async function loadCommentsFor(postId){
+  if(!window._commentsCache) window._commentsCache = {};
+  try{
+    const res = await window.storage.get('comments:' + postId, true);
+    let list = res ? JSON.parse(res.value) : [];
+    let migrated = false;
+    list.forEach(c => { if(c.id === undefined){ c.id = uid('c'); migrated = true; } if(c.status === undefined){ c.status = 'approved'; migrated = true; } });
+    window._commentsCache[postId] = list;
+    if(migrated){ try{ await window.storage.set('comments:' + postId, JSON.stringify(list), true); }catch(e){} }
+  }catch(e){ window._commentsCache[postId] = []; }
+}
+
+async function submitComment(postId){
+  const nameEl = document.getElementById('cName-' + postId);
+  const emailEl = document.getElementById('cEmail-' + postId);
+  const textEl = document.getElementById('cText-' + postId);
+  const btnEl = document.getElementById('cSubmitBtn-' + postId);
+  const noteEl = document.getElementById('cNote-' + postId);
+  const name = nameEl.value.trim() || 'Anonymous';
+  const email = emailEl.value.trim();
+  const text = textEl.value.trim();
+  if(!text) return;
+  if(btnEl.disabled) return;
+
+  if(!window._commentsCache) window._commentsCache = {};
+  if(!window._commentsCache[postId]) window._commentsCache[postId] = [];
+  window._commentsCache[postId].push({id: uid('c'), name, email, text, date:new Date().toISOString(), status:'pending'});
+  try{
+    await window.storage.set('comments:' + postId, JSON.stringify(window._commentsCache[postId]), true);
+  }catch(e){}
+  nameEl.value=''; emailEl.value=''; textEl.value='';
+  noteEl.textContent = 'Your comment will appear after review ✓';
+  btnEl.disabled = true;
+  btnEl.textContent = 'Please wait...';
+  setTimeout(() => { btnEl.disabled = false; btnEl.textContent = 'Post'; }, 10000);
+}
+
+/* ---------- Admin comment moderation ---------- */
+async function loadAllCommentsForAdmin(){
+  let all = [];
+  for(const p of posts){
+    try{
+      const res = await window.storage.get('comments:' + p.id, true);
+      let list = res ? JSON.parse(res.value) : [];
+      list.forEach(c => {
+        if(c.id === undefined) c.id = uid('c');
+        if(c.status === undefined) c.status = 'approved';
+        all.push(Object.assign({postId:p.id, postTitle:p.title}, c));
+      });
+    }catch(e){}
+  }
+  all.sort((a,b) => new Date(b.date) - new Date(a.date));
+  return all;
+}
+
+async function updateCommentStatus(postId, commentId, status){
+  try{
+    const res = await window.storage.get('comments:' + postId, true);
+    let list = res ? JSON.parse(res.value) : [];
+    const c = list.find(x => x.id === commentId);
+    if(c) c.status = status;
+    await window.storage.set('comments:' + postId, JSON.stringify(list), true);
+    if(window._commentsCache) window._commentsCache[postId] = list;
+  }catch(e){}
+}
+
+async function deleteCommentAdmin(postId, commentId){
+  try{
+    const res = await window.storage.get('comments:' + postId, true);
+    let list = res ? JSON.parse(res.value) : [];
+    list = list.filter(x => x.id !== commentId);
+    await window.storage.set('comments:' + postId, JSON.stringify(list), true);
+    if(window._commentsCache) window._commentsCache[postId] = list;
+  }catch(e){}
+}
+
+function renderFullPost(p, opts){
+  opts = opts || {};
+  return `
+    <article class="post-block" id="post-${p.id}">
+      <div class="post-head">
+        <div class="chip-row">
+          ${p.category ? `<span class="chip category">${escapeHtml(p.category)}</span>` : ''}
+          ${p.tag ? `<span class="chip">${escapeHtml(p.tag)}</span>` : ''}
+          ${(p.labels||[]).map(l => `<span class="chip label">${escapeHtml(l)}</span>`).join('')}
+        </div>
+        <h1>${escapeHtml(p.title)}</h1>
+        ${p.featuredImage ? `<img class="post-image" src="${p.featuredImage}" alt="${escapeHtml(p.title)}">` : ''}
+        <div class="rte-content">${sanitizeHtml(p.content) || ''}</div>
+        <div class="post-meta-row">
+          <span>✍️ ${escapeHtml(p.author || siteSettings.authorName)}</span>
+          <span>Posted on ${fmtDate(p.date)}</span>
+          <span>👁️ ${p.views||0} views</span>
+        </div>
+      </div>
+      ${p.items && p.items.length ? `<div class="item-list">${renderProductsHtml(p.items, p.id)}</div>` : ''}
+      ${renderShareRow(p)}
+      ${opts.showRelated ? `<div class="related-placeholder">Related articles coming soon</div>` : ''}
+      ${renderCommentsHtml(p)}
+    </article>
+  `;
+}
+
+/* ===================== PUBLIC HOME ===================== */
+function renderHome(){
+  currentView = 'home';
+  document.getElementById('adminLayout').style.display = 'none';
+  document.getElementById('publicWrap').style.display = 'block';
+  document.getElementById('siteHeader').style.display = 'flex';
+
+  let visible = posts.filter(p => p.status === 'published');
+
+  if(homeSearchQuery){
+    const q = homeSearchQuery.toLowerCase();
+    visible = visible.filter(p =>
+      (p.title||'').toLowerCase().includes(q) ||
+      (p.content||'').toLowerCase().includes(q) ||
+      (p.category||'').toLowerCase().includes(q) ||
+      (p.labels||[]).some(l => (l||'').toLowerCase().includes(q)) ||
+      (p.items||[]).some(it => (it.name||'').toLowerCase().includes(q))
+    );
+  }
+
+  const totalPages = Math.max(1, Math.ceil(visible.length / HOME_PAGE_SIZE));
+  if(homePage > totalPages) homePage = totalPages;
+  if(homePage < 1) homePage = 1;
+  const pageVisible = visible.slice((homePage-1)*HOME_PAGE_SIZE, homePage*HOME_PAGE_SIZE);
+  pageVisible.forEach(p => loadCommentsFor(p.id));
+
+  const main = document.getElementById('publicWrap');
+  const fullPosts = pageVisible.map(p => renderFullPost(p)).join('<hr class="post-divider">');
+  main.innerHTML = `
+    <div class="public-search-row">
+      <input type="text" id="homeSearchInput" placeholder="Search posts, categories or products..." value="${escapeHtml(homeSearchQuery)}">
+    </div>
+    <div class="section-label">All Posts ${homeSearchQuery ? `(${visible.length} found)` : ''}</div>
+    ${pageVisible.length ? fullPosts : `<div class="empty">${homeSearchQuery ? 'No posts found for this search.' : 'No posts yet.'}</div>`}
+    ${pagerHtml(homePage, totalPages)}
+  `;
+
+  document.getElementById('homeSearchInput').addEventListener('input', (e) => {
+    homeSearchQuery = e.target.value;
+    homePage = 1;
+    renderHome();
+  });
+  document.querySelectorAll('#publicWrap [data-pager]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const v = btn.dataset.pager;
+      if(v === 'prev') homePage--;
+      else if(v === 'next') homePage++;
+      else homePage = parseInt(v,10);
+      renderHome();
+      window.scrollTo(0,0);
+    });
+  });
+
+  setTimeout(() => { pageVisible.forEach(p => {
+    const listEl = document.getElementById('commentList-' + p.id);
+    if(listEl) renderCommentListInto(p.id);
+  }); }, 150);
+}
+
+function renderCommentListInto(postId){
+  const listEl = document.getElementById('commentList-' + postId);
+  if(!listEl || !window._commentsCache) return;
+  const list = (window._commentsCache[postId] || []).filter(c => c.status === 'approved');
+  listEl.innerHTML = list.map(c => `
+    <div class="comment-item">
+      <span class="c-name">${escapeHtml(c.name)}</span><span class="c-date">${fmtDate(c.date)}</span>
+      <div class="c-text">${escapeHtml(c.text)}</div>
+    </div>`).join('') || '<div style="font-size:13px;color:var(--ink-soft);">No comments yet.</div>';
+}
+
+/* ===================== ADMIN SHELL ===================== */
+function enterAdmin(view){
+  document.getElementById('siteHeader').style.display = 'none';
+  document.getElementById('publicWrap').style.display = 'none';
+  document.getElementById('adminLayout').style.display = 'block';
+  navigateAdmin(view || 'dashboard');
+}
+
+function exitAdmin(){
+  isAdmin = false;
+  updateTopLevelUI();
+  renderHome();
+}
+
+const DRAWER_ITEMS = [
+  {key:'dashboard', icon:'📊', label:'Dashboard'},
+  {key:'posts', icon:'📝', label:'Posts'},
+  {key:'new-post', icon:'➕', label:'New Post'},
+  {key:'drafts', icon:'📄', label:'Draft'},
+  {key:'published', icon:'✅', label:'Published'},
+  {key:'categories', icon:'🏷️', label:'Categories / Labels'},
+  {key:'media', icon:'🖼️', label:'Media'},
+  {key:'comments', icon:'💬', label:'Comments'},
+  {key:'settings', icon:'⚙️', label:'Settings'}
+];
+
+function renderDrawer(activeKey){
+  const drawer = document.getElementById('adminDrawer');
+  drawer.innerHTML = DRAWER_ITEMS.map(d => `
+    <div class="drawer-item ${activeKey===d.key?'active':''}" data-nav="${d.key}">
+      <span>${d.icon}</span><span>${d.label}</span>
+    </div>
+  `).join('');
+}
+
+function closeDrawer(){
+  document.getElementById('adminDrawer').classList.remove('open');
+  document.getElementById('adminOverlay').classList.remove('open');
+}
+function toggleDrawer(){
+  document.getElementById('adminDrawer').classList.toggle('open');
+  document.getElementById('adminOverlay').classList.toggle('open');
+}
+
+function setBackOrMenuIcon(isEditor){
+  const btn = document.getElementById('adminBackOrMenu');
+  btn.textContent = isEditor ? '←' : '☰';
+  btn.onclick = isEditor ? () => navigateAdmin('posts') : toggleDrawer;
+}
+
+function navigateAdmin(view, param){
+  currentView = view;
+  closeDrawer();
+  let activeKey = view;
+  if(view === 'editor') activeKey = param && param.id ? 'posts' : 'new-post';
+  renderDrawer(activeKey);
+  setBackOrMenuIcon(view === 'editor' || view === 'preview');
+
+  if(view === 'dashboard') renderDashboard();
+  else if(view === 'posts'){ postsFilter.status='all'; adminPostsPage=1; renderPostsListView(); }
+  else if(view === 'drafts'){ postsFilter.status='draft'; adminPostsPage=1; renderPostsListView(); }
+  else if(view === 'published'){ postsFilter.status='published'; adminPostsPage=1; renderPostsListView(); }
+  else if(view === 'new-post') renderEditor(null);
+  else if(view === 'editor') renderEditor(param);
+  else if(view === 'categories') renderCategories();
+  else if(view === 'media') renderMedia();
+  else if(view === 'comments') renderAdminComments();
+  else if(view === 'settings') renderSettings();
+  else if(view === 'preview') renderPreviewView();
+
+  window.scrollTo(0,0);
+}
+
+/* ===================== ADMIN COMMENTS MODERATION ===================== */
+let adminCommentsFilter = 'pending';
+
+async function renderAdminComments(){
+  document.getElementById('adminMain').innerHTML = `<div class="loading">Loading…</div>`;
+  const all = await loadAllCommentsForAdmin();
+  const filtered = adminCommentsFilter === 'all' ? all : all.filter(c => c.status === adminCommentsFilter);
+  const pendingCount = all.filter(c => c.status === 'pending').length;
+
+  const rows = filtered.map(c => `
+    <div class="post-row">
+      <div class="row-info">
+        <div class="row-title">${escapeHtml(c.name)} ${c.email ? `<span style="font-weight:400;color:var(--ink-soft);font-size:12px;">(${escapeHtml(c.email)})</span>` : ''}</div>
+        <div style="font-size:13.5px;color:var(--ink);margin:4px 0;">${escapeHtml(c.text)}</div>
+        <div class="row-meta">
+          <span class="status-badge ${c.status==='approved'?'published':(c.status==='pending'?'scheduled':'draft')}">${c.status==='approved'?'Approved':(c.status==='pending'?'Pending review':'Rejected')}</span>
+          <span>Posts: ${escapeHtml(c.postTitle||'')}</span>
+          <span>${fmtDate(c.date)}</span>
+        </div>
+      </div>
+      <div class="row-actions">
+        ${c.status !== 'approved' ? `<button class="btn btn-teal btn-sm" data-action="approve-comment" data-post-id="${c.postId}" data-id="${c.id}">Approve</button>` : ''}
+        ${c.status !== 'rejected' ? `<button class="btn btn-ghost btn-sm" data-action="reject-comment" data-post-id="${c.postId}" data-id="${c.id}">Reject</button>` : ''}
+        <button class="btn btn-danger btn-sm" data-action="delete-comment" data-post-id="${c.postId}" data-id="${c.id}">Delete</button>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('adminMain').innerHTML = `
+    <h1 class="page-title">Comments ${pendingCount ? `<span style="font-size:13px;color:var(--danger);font-weight:600;">(${pendingCount} pending review)</span>` : ''}</h1>
+    <div class="toolbar-row">
+      <select id="commentsFilterSelect">
+        <option value="pending" ${adminCommentsFilter==='pending'?'selected':''}>Pending review</option>
+        <option value="approved" ${adminCommentsFilter==='approved'?'selected':''}>Approved</option>
+        <option value="rejected" ${adminCommentsFilter==='rejected'?'selected':''}>Rejected</option>
+        <option value="all" ${adminCommentsFilter==='all'?'selected':''}>All</option>
+      </select>
+    </div>
+    ${filtered.length ? rows : '<div class="empty">No comments in this filter.</div>'}
+  `;
+  document.getElementById('commentsFilterSelect').addEventListener('change', (e) => {
+    adminCommentsFilter = e.target.value;
+    renderAdminComments();
+  });
+}
+
+/* ===================== DASHBOARD ===================== */
+async function renderDashboard(){
+  const published = posts.filter(p=>p.status==='published').length;
+  const drafts = posts.filter(p=>p.status==='draft').length;
+  const scheduled = posts.filter(p=>p.status==='scheduled').length;
+  const totalViews = posts.reduce((s,p)=>s+(p.views||0),0);
+  const allComments = await loadAllCommentsForAdmin();
+  const pendingComments = allComments.filter(c=>c.status==='pending').length;
+
+  const recentRows = posts.slice().sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5)
+    .map(p => postRowHtml(p)).join('');
+
+  document.getElementById('adminMain').innerHTML = `
+    <h1 class="page-title">Dashboard</h1>
+    <div class="stats-grid">
+      <div class="stat-card"><span class="num">${posts.length}</span><span class="label">Total Posts</span></div>
+      <div class="stat-card"><span class="num">${published}</span><span class="label">Published Posts</span></div>
+      <div class="stat-card"><span class="num">${drafts}</span><span class="label">Draft</span></div>
+      <div class="stat-card"><span class="num">${totalViews}</span><span class="label">Total Views</span></div>
+    </div>
+    <div class="quick-actions">
+      <button class="btn btn-primary" data-nav="new-post">+ New Post</button>
+      <button class="btn btn-ghost" data-nav="categories">Manage Categories</button>
+      ${pendingComments ? `<button class="btn btn-ghost" data-nav="comments">💬 ${pendingComments} comments pending review</button>` : ''}
+      <button class="btn btn-ghost" data-action="go-public">View Website</button>
+    </div>
+    ${scheduled ? `<div class="section-label">Scheduled (${scheduled})</div><div style="margin-bottom:14px;font-size:13px;color:var(--ink-soft);">These posts will publish automatically at the scheduled time (when a visitor opens the site).</div>` : ''}
+    <div class="section-label">Recent Posts</div>
+    ${recentRows || '<div class="empty">No posts yet.</div>'}
+  `;
+}
+
+/* ===================== POSTS LIST ===================== */
+function postRowHtml(p){
+  const statusLabel = p.status==='published'?'Published':(p.status==='scheduled'?'Scheduled':'Draft');
+  return `
+    <div class="post-row">
+      ${p.featuredImage ? `<img class="row-thumb" src="${p.featuredImage}">` : `<div class="row-thumb"></div>`}
+      <div class="row-info">
+        <div class="row-title">${escapeHtml(p.title || '(Untitled)')}</div>
+        <div class="row-meta">
+          <span class="status-badge ${p.status}">${statusLabel}</span>
+          <span>${escapeHtml(p.category || 'No category')}</span>
+          <span>${fmtDate(p.date)}</span>
+          <span>👁️ ${p.views||0}</span>
+        </div>
+      </div>
+      <div class="row-actions">
+        <button class="btn btn-ghost btn-sm" data-action="edit-post" data-id="${p.id}">Edit</button>
+        <button class="btn btn-ghost btn-sm" data-action="quick-toggle" data-id="${p.id}">${p.status==='published' ? 'Make Draft' : 'Publish'}</button>
+        <button class="btn btn-danger btn-sm" data-action="delete-post" data-id="${p.id}">Delete</button>
+      </div>
+    </div>
+  `;
+}
+
+function pagerHtml(current, totalPages, navFn){
+  if(totalPages <= 1) return '';
+  let btns = '';
+  btns += `<button class="btn btn-ghost btn-sm" ${current<=1?'disabled':''} data-pager="prev">Previous</button>`;
+  for(let i=1;i<=totalPages;i++){
+    btns += `<button class="btn ${i===current?'btn-primary':'btn-ghost'} btn-sm" data-pager="${i}">${i}</button>`;
+  }
+  btns += `<button class="btn btn-ghost btn-sm" ${current>=totalPages?'disabled':''} data-pager="next">Next</button>`;
+  return `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:18px;">${btns}</div>`;
+}
+
+function renderPostsListView(){
+  const categoryOptions = categories.map(c => `<option value="${escapeHtml(c)}" ${postsFilter.category===c?'selected':''}>${escapeHtml(c)}</option>`).join('');
+
+  let list = posts.slice();
+  if(postsFilter.search){
+    const q = postsFilter.search.toLowerCase();
+    list = list.filter(p => (p.title||'').toLowerCase().includes(q));
+  }
+  if(postsFilter.status !== 'all'){ list = list.filter(p => p.status === postsFilter.status); }
+  if(postsFilter.category){ list = list.filter(p => p.category === postsFilter.category); }
+  list.sort((a,b) => postsFilter.sort==='oldest' ? new Date(a.date)-new Date(b.date) : new Date(b.date)-new Date(a.date));
+
+  const totalPages = Math.max(1, Math.ceil(list.length / ADMIN_PAGE_SIZE));
+  if(adminPostsPage > totalPages) adminPostsPage = totalPages;
+  if(adminPostsPage < 1) adminPostsPage = 1;
+  const pageList = list.slice((adminPostsPage-1)*ADMIN_PAGE_SIZE, adminPostsPage*ADMIN_PAGE_SIZE);
+
+  const titleMap = {all:'All Posts', draft:'Draft', published:'Published Posts', scheduled:'Scheduled Posts'};
+
+  document.getElementById('adminMain').innerHTML = `
+    <h1 class="page-title">${titleMap[postsFilter.status] || 'Posts'}</h1>
+    <div class="toolbar-row">
+      <input type="text" id="postSearchInput" placeholder="Search by title..." value="${escapeHtml(postsFilter.search)}" style="flex:1;min-width:160px;">
+      <select id="statusFilterSelect">
+        <option value="all" ${postsFilter.status==='all'?'selected':''}>All statuses</option>
+        <option value="published" ${postsFilter.status==='published'?'selected':''}>Published</option>
+        <option value="draft" ${postsFilter.status==='draft'?'selected':''}>Draft</option>
+        <option value="scheduled" ${postsFilter.status==='scheduled'?'selected':''}>Scheduled</option>
+      </select>
+      <select id="categoryFilterSelect">
+        <option value="">All categories</option>
+        ${categoryOptions}
+      </select>
+      <select id="sortSelect">
+        <option value="newest" ${postsFilter.sort==='newest'?'selected':''}>Newest first</option>
+        <option value="oldest" ${postsFilter.sort==='oldest'?'selected':''}>Oldest first</option>
+      </select>
+      <button class="btn btn-primary btn-sm" data-nav="new-post">+ New Post</button>
+    </div>
+    <div style="font-size:12.5px;color:var(--ink-soft);margin-bottom:10px;">${list.length} posts found · Page ${adminPostsPage} / ${totalPages}</div>
+    ${pageList.length ? pageList.map(p => postRowHtml(p)).join('') : '<div class="empty">No posts found.</div>'}
+    ${pagerHtml(adminPostsPage, totalPages)}
+  `;
+
+  document.getElementById('postSearchInput').addEventListener('input', (e) => { postsFilter.search = e.target.value; adminPostsPage = 1; renderPostsListView(); });
+  document.getElementById('statusFilterSelect').addEventListener('change', (e) => { postsFilter.status = e.target.value; adminPostsPage = 1; renderPostsListView(); });
+  document.getElementById('categoryFilterSelect').addEventListener('change', (e) => { postsFilter.category = e.target.value; adminPostsPage = 1; renderPostsListView(); });
+  document.getElementById('sortSelect').addEventListener('change', (e) => { postsFilter.sort = e.target.value; adminPostsPage = 1; renderPostsListView(); });
+  document.querySelectorAll('#adminMain [data-pager]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const v = btn.dataset.pager;
+      if(v === 'prev') adminPostsPage--;
+      else if(v === 'next') adminPostsPage++;
+      else adminPostsPage = parseInt(v,10);
+      renderPostsListView();
+    });
+  });
+}
+
+/* ===================== CATEGORIES ===================== */
+function renderCategories(){
+  const rows = categories.map(cat => {
+    const count = posts.filter(p => p.category === cat).length;
+    return `
+    <div class="category-row">
+      <div>${escapeHtml(cat)} <span class="cat-count">(${count} Posts)</span></div>
+      <button class="btn btn-danger btn-sm" data-action="delete-category" data-cat="${escapeHtml(cat)}">Delete</button>
+    </div>`;
+  }).join('');
+
+  const allLabels = [...new Set(posts.flatMap(p => p.labels||[]))];
+
+  document.getElementById('adminMain').innerHTML = `
+    <h1 class="page-title">Categories / Labels</h1>
+    <div class="form-card">
+      <h2>Categories</h2>
+      <p style="font-size:13px;color:var(--ink-soft);">Every post is given one category.</p>
+      <div class="category-add-row">
+        <input type="text" id="newCategoryInput" placeholder="New category, e.g. Headphones">
+        <button class="btn btn-primary btn-sm" data-action="add-category">Add</button>
+      </div>
+      <div class="category-list">${categories.length ? rows : '<div class="empty">No categories yet.</div>'}</div>
+    </div>
+    <div class="form-card" style="margin-top:18px;">
+      <h2>Labels</h2>
+      <p style="font-size:13px;color:var(--ink-soft);">Labels are added separately (comma-separated) each time you write a post. Labels used so far:</p>
+      <div class="chip-row" style="margin-top:10px;">
+        ${allLabels.length ? allLabels.map(l => `<span class="chip label">${escapeHtml(l)}</span>`).join('') : '<span style="font-size:13px;color:var(--ink-soft);">No labels yet.</span>'}
+      </div>
+    </div>
+  `;
+}
+
+/* ===================== MEDIA LIBRARY ===================== */
+function renderMedia(){
+  const tiles = media.map(m => `
+    <div class="media-tile">
+      <img src="${m.dataUrl}">
+      <div class="m-size">${approxSize(m.dataUrl)}</div>
+      <button class="m-del" data-action="delete-media" data-id="${m.id}">✕</button>
+    </div>
+  `).join('');
+
+  document.getElementById('adminMain').innerHTML = `
+    <h1 class="page-title">Media Library</h1>
+    <div class="form-card" style="max-width:none;">
+      <p style="font-size:13px;color:var(--ink-soft);">Images uploaded here can be reused in the post editor via "Insert Image".</p>
+      <label for="mediaUploadInput" class="btn btn-primary btn-sm" style="display:inline-block;margin-top:10px;">+ Upload Image</label>
+      <input type="file" id="mediaUploadInput" accept="image/*" multiple style="display:none;">
+      <div class="media-grid">${tiles || '<div class="empty">No media yet.</div>'}</div>
+    </div>
+  `;
+
+  document.getElementById('mediaUploadInput').addEventListener('change', async (e) => {
+    const files = Array.from(e.target.files || []);
+    for(const f of files){
+      const dataUrl = await fileToDataURL(f);
+      media.unshift({id: uid('m'), dataUrl, dateAdded: new Date().toISOString()});
+    }
+    const saved = await saveMedia();
+    if(!saved){ alert('Media could not be saved — try reducing the image size and try again.'); }
+    renderMedia();
+  });
+}
+
+function openMediaPicker(target){
+  mediaPickerTarget = target;
+  const box = document.getElementById('mediaPickerBox');
+  const tiles = media.map(m => `
+    <div class="media-tile media-pick-tile" data-action="pick-media" data-id="${m.id}">
+      <img src="${m.dataUrl}">
+    </div>
+  `).join('');
+  box.innerHTML = `
+    <h2 style="margin-bottom:12px;">Choose from Media</h2>
+    <div class="media-grid">${tiles || '<div class="empty">The media library is empty. First add an image using the "Upload" button.</div>'}</div>
+    <div style="margin-top:16px;text-align:right;"><button class="btn btn-ghost btn-sm" data-action="close-media-picker">Close</button></div>
+  `;
+  document.getElementById('mediaPickerOverlay').classList.add('open');
+}
+function closeMediaPicker(){
+  document.getElementById('mediaPickerOverlay').classList.remove('open');
+  mediaPickerTarget = null;
+}
+
+/* ===================== SETTINGS ===================== */
+function renderSettings(){
+  document.getElementById('adminMain').innerHTML = `
+    <h1 class="page-title">Settings</h1>
+    <div class="form-card">
+      <h2>Site Information</h2>
+      <label for="setAuthorName">Default author name</label>
+      <input type="text" id="setAuthorName" value="${escapeHtml(siteSettings.authorName)}">
+      <label for="setTagline">Site tagline</label>
+      <input type="text" id="setTagline" value="${escapeHtml(siteSettings.tagline)}">
+      <div style="margin-top:16px;"><button class="btn btn-primary btn-sm" data-action="save-site-settings">Save</button></div>
+    </div>
+    <div class="form-card" style="margin-top:18px;">
+      <h2>Change Password</h2>
+      <label for="curPassword">Current password</label>
+      <input type="password" id="curPassword">
+      <label for="newPassword">New password</label>
+      <input type="password" id="newPassword">
+      <label for="confirmPassword">Re-enter new password</label>
+      <input type="password" id="confirmPassword">
+      <div style="margin-top:16px;"><button class="btn btn-primary btn-sm" data-action="change-password">Change Password</button></div>
+    </div>
+    <div class="form-card" style="margin-top:18px;">
+      <h2>Data Backup</h2>
+      <p style="font-size:13px;color:var(--ink-soft);">Download all posts, categories and settings into a JSON file, or restore from an old backup file.</p>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-teal btn-sm" data-action="export-data">⬇️ Export (JSON)</button>
+        <label for="importDataInput" class="btn btn-ghost btn-sm" style="display:inline-block;">⬆️ Import</label>
+        <input type="file" id="importDataInput" accept="application/json" style="display:none;">
+      </div>
+    </div>
+  `;
+  document.getElementById('importDataInput').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if(!file) return;
+    await importDataFromFile(file);
+    e.target.value = '';
+  });
+}
+
+function exportData(){
+  const bundle = { posts, categories, siteSettings, exportedAt: new Date().toISOString() };
+  const blob = new Blob([JSON.stringify(bundle, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'sameer-website-builder-backup-' + new Date().toISOString().slice(0,10) + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Backup downloaded ✓');
+}
+
+async function importDataFromFile(file){
+  let data;
+  try{
+    const text = await file.text();
+    data = JSON.parse(text);
+  }catch(e){ alert('There was a problem reading the file — this does not look like a valid JSON backup file.'); return; }
+  if(!data || !Array.isArray(data.posts)){ alert('Invalid file — no post data found in it.'); return; }
+  if(!confirm('This will replace all existing posts and categories. Continue?')) return;
+  posts = data.posts;
+  if(Array.isArray(data.categories)) categories = data.categories;
+  if(data.siteSettings) siteSettings = Object.assign(siteSettings, data.siteSettings);
+  await savePosts();
+  await saveCategories();
+  await saveSettings();
+  document.getElementById('siteTagline').textContent = siteSettings.tagline;
+  showToast('Data imported ✓');
+  renderSettings();
+}
+
+/* ===================== EDITOR ===================== */
+function renderEditor(existingPost){
+  editorIsNew = !existingPost;
+  editorPost = existingPost ? JSON.parse(JSON.stringify(existingPost)) : {
+    id: uid('p'), title:'', slug:'', category:'', labels:[], tag:'',
+    author: siteSettings.authorName, status:'draft', scheduledDate:null,
+    seoTitle:'', seoDescription:'', commentsEnabled:true, featuredImage:null,
+    content:'', date:null, updatedDate:null, views:0, items:[]
+  };
+  slugManuallyEdited = !!(existingPost && existingPost.slug);
+  editorLastSaved = null;
+  savedRange = null;
+
+  document.getElementById('adminMain').innerHTML = `
+    <div class="editor-topbar">
+      <input type="text" id="editorTitleInput" class="editor-title-input" placeholder="Write the post title here..." value="${escapeHtml(editorPost.title)}">
+      <span class="save-status" id="saveStatusText"></span>
+      <div class="editor-topbar-actions">
+        <button class="btn btn-ghost btn-sm" data-action="open-post-settings">⚙️ Settings</button>
+        <button class="btn btn-ghost btn-sm" data-action="open-preview">👁️ Preview</button>
+        <button class="btn btn-ghost btn-sm" data-action="save-draft">Save Draft</button>
+        <button class="btn btn-primary btn-sm" data-action="publish-post">Publish</button>
+      </div>
+    </div>
+    <div class="rte-toolbar" id="rteToolbar">
+      <button data-cmd="undo" title="Undo">↺</button>
+      <button data-cmd="redo" title="Redo">↻</button>
+      <div class="sep"></div>
+      <button data-cmd="bold" title="Bold"><b>B</b></button>
+      <button data-cmd="italic" title="Italic"><i>I</i></button>
+      <button data-cmd="underline" title="Underline"><u>U</u></button>
+      <button data-cmd="strikeThrough" title="Strikethrough"><s>S</s></button>
+      <input type="color" id="foreColorInput" title="Text color" value="#FFFFFF">
+      <input type="color" id="hiliteColorInput" title="Highlight" value="#FFF3C4">
+      <div class="sep"></div>
+      <select id="fontSizeSelect" title="Font size">
+        <option value="2">Small</option>
+        <option value="3" selected>Normal</option>
+        <option value="5">Large</option>
+        <option value="7">Very Large</option>
+      </select>
+      <select id="blockFormatSelect" title="Paragraph style">
+        <option value="p">Paragraph</option>
+        <option value="h1">H1</option>
+        <option value="h2">H2</option>
+        <option value="h3">H3</option>
+      </select>
+      <div class="sep"></div>
+      <button data-cmd="justifyLeft" title="Align left">⇤</button>
+      <button data-cmd="justifyCenter" title="Align center">≡</button>
+      <button data-cmd="justifyRight" title="Align right">⇥</button>
+      <div class="sep"></div>
+      <button data-cmd="insertUnorderedList" title="Bullet list">• List</button>
+      <button data-cmd="insertOrderedList" title="Numbered list">1. List</button>
+      <button data-cmd="quote" title="Quote">" Quote</button>
+      <button data-cmd="hr" title="Horizontal line">―</button>
+      <div class="sep"></div>
+      <button data-cmd="link" title="Insert link">🔗 Link</button>
+      <button data-cmd="mediaImage" title="Insert image from media">🖼️ Insert Image</button>
+      <button data-cmd="uploadImage" title="Upload image">⬆️ Upload</button>
+      <button data-cmd="video" title="Insert video/embed">▶️ Video</button>
+      <div class="sep"></div>
+      <button data-cmd="clear" title="Clear formatting">✕ Clear Formatting</button>
+    </div>
+    <div class="editor-body-wrap">
+      <div class="editor-canvas" id="editorCanvas" contenteditable="true" data-placeholder="Start writing your post here...">${editorPost.content || ''}</div>
+    </div>
+    <input type="file" id="hiddenUploadInput" accept="image/*" style="display:none;">
+  `;
+
+  document.execCommand('styleWithCSS', false, true);
+
+  const canvas = document.getElementById('editorCanvas');
+  canvas.addEventListener('mouseup', saveSelection);
+  canvas.addEventListener('keyup', saveSelection);
+
+  document.getElementById('foreColorInput').addEventListener('input', (e) => {
+    withCanvasFocus(() => document.execCommand('foreColor', false, e.target.value));
+  });
+  document.getElementById('hiliteColorInput').addEventListener('input', (e) => {
+    withCanvasFocus(() => { try{ document.execCommand('hiliteColor', false, e.target.value); }catch(err){ document.execCommand('backColor', false, e.target.value); } });
+  });
+  document.getElementById('fontSizeSelect').addEventListener('change', (e) => {
+    withCanvasFocus(() => document.execCommand('fontSize', false, e.target.value));
+  });
+  document.getElementById('blockFormatSelect').addEventListener('change', (e) => {
+    const tag = e.target.value === 'p' ? 'p' : e.target.value;
+    withCanvasFocus(() => document.execCommand('formatBlock', false, '<'+tag+'>'));
+  });
+  document.getElementById('hiddenUploadInput').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if(!file) return;
+    const dataUrl = await fileToDataURL(file);
+    media.unshift({id: uid('m'), dataUrl, dateAdded:new Date().toISOString()});
+    await saveMedia();
+    withCanvasFocus(() => document.execCommand('insertImage', false, dataUrl));
+    e.target.value = '';
+  });
+
+  openPostSettingsPanelSilently();
+}
+
+function saveSelection(){
+  const sel = window.getSelection();
+  if(sel.rangeCount > 0){
+    const range = sel.getRangeAt(0);
+    if(document.getElementById('editorCanvas').contains(range.commonAncestorContainer)){
+      savedRange = range.cloneRange();
+    }
+  }
+}
+function restoreSelection(){
+  if(savedRange){
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(savedRange);
+  }
+}
+function withCanvasFocus(fn){
+  const canvas = document.getElementById('editorCanvas');
+  canvas.focus();
+  restoreSelection();
+  fn();
+  saveSelection();
+}
+
+document.addEventListener('mousedown', (e) => {
+  if(e.target.closest('.rte-toolbar') && e.target.tagName === 'BUTTON'){ e.preventDefault(); }
+});
+
+document.addEventListener('click', (e) => {
+  const cmdBtn = e.target.closest('.rte-toolbar [data-cmd]');
+  if(cmdBtn){
+    const cmd = cmdBtn.dataset.cmd;
+    if(cmd === 'quote') withCanvasFocus(() => document.execCommand('formatBlock', false, '<blockquote>'));
+    else if(cmd === 'hr') withCanvasFocus(() => document.execCommand('insertHorizontalRule'));
+    else if(cmd === 'clear') withCanvasFocus(() => document.execCommand('removeFormat'));
+    else if(cmd === 'link') createLinkPrompt();
+    else if(cmd === 'video') insertVideoEmbed();
+    else if(cmd === 'mediaImage') { saveSelection(); openMediaPicker('canvas'); }
+    else if(cmd === 'uploadImage') { document.getElementById('hiddenUploadInput').click(); }
+    else withCanvasFocus(() => document.execCommand(cmd));
+  }
+});
+
+function createLinkPrompt(){
+  saveSelection();
+  const url = prompt('Enter the URL the link should go to:', 'https://');
+  if(!url) return;
+  withCanvasFocus(() => document.execCommand('createLink', false, url));
+}
+
+function insertVideoEmbed(){
+  saveSelection();
+  const url = prompt('Enter the YouTube/Vimeo video URL:', 'https://');
+  if(!url) return;
+  let embedUrl = null;
+  let m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{6,})/);
+  if(m) embedUrl = 'https://www.youtube.com/embed/' + m[1];
+  else {
+    m = url.match(/vimeo\.com\/(\d+)/);
+    if(m) embedUrl = 'https://player.vimeo.com/video/' + m[1];
+  }
+  if(embedUrl){
+    const html = `<iframe width="100%" height="315" src="${embedUrl}" frameborder="0" allowfullscreen></iframe>`;
+    withCanvasFocus(() => document.execCommand('insertHTML', false, html));
+  } else {
+    withCanvasFocus(() => document.execCommand('insertHTML', false, `<a href="${url}" target="_blank" rel="noopener">${url}</a>`));
+  }
+}
+
+/* ---------- Post settings panel ---------- */
+function openPostSettingsPanelSilently(){ /* panel content built lazily when opened */ }
+
+function buildProductRowHtml(existingItem){
+  productRowCount++;
+  const idx = productRowCount;
+  return `
+    <div class="product-row" data-row-id="${idx}">
+      <button type="button" class="remove-product" data-action="remove-product-row">Remove</button>
+      <div class="p-num">Product ${idx}</div>
+      <label>Name</label>
+      <input type="text" class="pr-name" value="${existingItem ? escapeHtml(existingItem.name) : ''}" placeholder="e.g. boAt Airdopes 141">
+      <label>Price</label>
+      <input type="text" class="pr-price" value="${existingItem ? escapeHtml(existingItem.price) : ''}" placeholder="e.g. Starting at ₹999">
+      <label>Image</label>
+      <input type="file" class="pr-image" accept="image/*">
+      <img class="pr-image-preview img-preview" style="${existingItem && existingItem.image ? '' : 'display:none;'}" src="${existingItem && existingItem.image ? existingItem.image : ''}">
+      <label>Affiliate Link</label>
+      <input type="url" class="pr-affiliate" value="${existingItem && existingItem.affiliateLink ? escapeHtml(existingItem.affiliateLink) : ''}" placeholder="https://...">
+      <label>Description</label>
+      <textarea class="pr-desc" rows="2">${existingItem ? escapeHtml(existingItem.desc) : ''}</textarea>
+    </div>
+  `;
+}
+
+function openPostSettingsPanel(){
+  const panel = document.getElementById('settingsPanel');
+  const categoryOptions = categories.map(c => `<option value="${escapeHtml(c)}" ${editorPost.category===c?'selected':''}>${escapeHtml(c)}</option>`).join('');
+  productRowCount = 0;
+  const productsHtml = (editorPost.items && editorPost.items.length ? editorPost.items : []).map(it => buildProductRowHtml(it)).join('');
+
+  panel.innerHTML = `
+    <button class="sp-close" data-action="close-post-settings">✕</button>
+    <h2>Posts Settings</h2>
+
+    <label for="spCategory">Category</label>
+    <select id="spCategory">
+      <option value="">-- Select --</option>
+      ${categoryOptions}
+    </select>
+
+    <label for="spLabels">Labels (comma separated)</label>
+    <input type="text" id="spLabels" value="${escapeHtml((editorPost.labels||[]).join(', '))}" placeholder="e.g. Earbuds, Budget, Gadgets">
+
+    <label for="spTag">Budget Tag</label>
+    <input type="text" id="spTag" value="${escapeHtml(editorPost.tag||'')}" placeholder="e.g. Under ₹15,000">
+
+    <label for="spSlug">URL Slug</label>
+    <input type="text" id="spSlug" value="${escapeHtml(editorPost.slug||'')}">
+
+    <label for="spAuthor">Author</label>
+    <input type="text" id="spAuthor" value="${escapeHtml(editorPost.author||siteSettings.authorName)}">
+
+    <label for="spDate">Publish Date</label>
+    <input type="date" id="spDate" value="${editorPost.scheduledDate ? editorPost.scheduledDate.slice(0,10) : (editorPost.date ? editorPost.date.slice(0,10) : '')}">
+    <p style="font-size:12px;color:var(--ink-soft);margin-top:4px;">If you enter a future date and click "Publish", the post will automatically be scheduled for that day.</p>
+
+    <div class="toggle-row">
+      <input type="checkbox" id="spComments" ${editorPost.commentsEnabled ? 'checked' : ''}>
+      <label for="spComments" style="margin:0;">Keep Comments enabled</label>
+    </div>
+
+    <label for="spFeaturedImage">Featured Image</label>
+    <input type="file" id="spFeaturedImage" accept="image/*">
+    <img id="spFeaturedPreview" class="img-preview" style="${editorPost.featuredImage ? '' : 'display:none;'}" src="${editorPost.featuredImage || ''}">
+    <div style="margin-top:6px;display:flex;gap:8px;">
+      <button type="button" class="btn btn-ghost btn-sm" data-action="pick-featured-from-media">Choose from Media</button>
+      ${editorPost.featuredImage ? `<button type="button" class="btn btn-ghost btn-sm" data-action="remove-featured-image">Remove</button>` : ''}
+    </div>
+
+    <label>SEO Title</label>
+    <input type="text" id="spSeoTitle" value="${escapeHtml(editorPost.seoTitle||'')}" placeholder="The title shown in search results">
+    <label>Meta Description</label>
+    <textarea id="spSeoDesc" rows="2" placeholder="Description in 150-160 characters">${escapeHtml(editorPost.seoDescription||'')}</textarea>
+
+    <div style="margin-top:22px;padding-top:16px;border-top:1px solid var(--admin-line);">
+      <label style="margin-top:0;font-weight:700;color:var(--ink);">Products (optional)</label>
+      <div id="productsWrap">${productsHtml}</div>
+      <button type="button" class="add-product-btn" data-action="add-product-row">+ Add Product</button>
+    </div>
+  `;
+
+  document.getElementById('spTitle')?.addEventListener('input', () => {});
+  document.getElementById('spSlug').addEventListener('input', () => { slugManuallyEdited = true; });
+  document.getElementById('spFeaturedImage').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if(!file) return;
+    const dataUrl = await fileToDataURL(file);
+    document.getElementById('spFeaturedPreview').src = dataUrl;
+    document.getElementById('spFeaturedPreview').style.display = 'block';
+    editorPost.featuredImage = dataUrl;
+    media.unshift({id: uid('m'), dataUrl, dateAdded:new Date().toISOString()});
+    saveMedia();
+  });
+
+  document.getElementById('settingsPanel').classList.add('open');
+  document.getElementById('spOverlay').classList.add('open');
+}
+
+function closePostSettingsPanel(){
+  document.getElementById('settingsPanel').classList.remove('open');
+  document.getElementById('spOverlay').classList.remove('open');
+}
+
+/* ===================== COLLECT + SAVE EDITOR DATA ===================== */
+function collectEditorData(){
+  const titleInput = document.getElementById('editorTitleInput');
+  const canvas = document.getElementById('editorCanvas');
+  editorPost.title = titleInput ? titleInput.value.trim() : editorPost.title;
+  editorPost.content = canvas ? sanitizeHtml(canvas.innerHTML) : editorPost.content;
+
+  const spCategory = document.getElementById('spCategory');
+  if(spCategory) editorPost.category = spCategory.value;
+  const spLabels = document.getElementById('spLabels');
+  if(spLabels) editorPost.labels = spLabels.value.split(',').map(s=>s.trim()).filter(Boolean);
+  const spTag = document.getElementById('spTag');
+  if(spTag) editorPost.tag = spTag.value.trim();
+  const spSlug = document.getElementById('spSlug');
+  editorPost.slug = spSlug ? (spSlug.value.trim() || slugify(editorPost.title)) : slugify(editorPost.title);
+  const spAuthor = document.getElementById('spAuthor');
+  if(spAuthor) editorPost.author = spAuthor.value.trim() || siteSettings.authorName;
+  const spDate = document.getElementById('spDate');
+  const dateVal = spDate ? spDate.value : '';
+  const spComments = document.getElementById('spComments');
+  if(spComments) editorPost.commentsEnabled = spComments.checked;
+  const spSeoTitle = document.getElementById('spSeoTitle');
+  if(spSeoTitle) editorPost.seoTitle = spSeoTitle.value.trim();
+  const spSeoDesc = document.getElementById('spSeoDesc');
+  if(spSeoDesc) editorPost.seoDescription = spSeoDesc.value.trim();
+
+  const rows = document.querySelectorAll('#productsWrap .product-row');
+  const items = [];
+  rows.forEach(row => {
+    const name = row.querySelector('.pr-name').value.trim();
+    const price = row.querySelector('.pr-price').value.trim();
+    const desc = row.querySelector('.pr-desc').value.trim();
+    const affiliateLink = row.querySelector('.pr-affiliate').value.trim();
+    const preview = row.querySelector('.pr-image-preview');
+    const image = (preview && preview.style.display !== 'none') ? preview.src : null;
+    if(name || price || desc){ items.push({name, price, desc, affiliateLink, image}); }
+  });
+  editorPost.items = items;
+
+  return dateVal;
+}
+
+async function handleSaveDraft(){
+  collectEditorData();
+  if(!editorPost.title){ showToast('Please write a title first.'); return; }
+  editorPost.status = 'draft';
+  editorPost.scheduledDate = null;
+  editorPost.updatedDate = new Date().toISOString();
+  if(!editorPost.date) editorPost.date = editorPost.updatedDate;
+
+  const idx = posts.findIndex(p => p.id === editorPost.id);
+  if(idx >= 0) posts[idx] = editorPost; else posts.unshift(editorPost);
+  const saved = await savePosts();
+  if(!saved){ showToast('Could not save — the images might be too large.'); return; }
+  editorIsNew = false;
+  editorLastSaved = new Date();
+  document.getElementById('saveStatusText').textContent = 'Saved ✓ · Last saved: ' + fmtDateTime(editorLastSaved.toISOString());
+  showToast('Saved ✓');
+}
+
+async function handlePublish(){
+  const dateVal = collectEditorData();
+  if(!editorPost.title){ showToast('Please write a title.'); return; }
+  const plainText = document.getElementById('editorCanvas').textContent.trim();
+  if(!plainText){ showToast('Please write some content.'); return; }
+
+  const now = new Date();
+  if(dateVal){
+    const chosen = new Date(dateVal + 'T00:00:00');
+    if(chosen.getTime() > now.getTime()){
+      editorPost.status = 'scheduled';
+      editorPost.scheduledDate = chosen.toISOString();
+      editorPost.date = editorPost.date || chosen.toISOString();
+    } else {
+      editorPost.status = 'published';
+      editorPost.scheduledDate = null;
+      editorPost.date = editorPost.date || chosen.toISOString();
+    }
+  } else {
+    editorPost.status = 'published';
+    editorPost.scheduledDate = null;
+    if(!editorPost.date) editorPost.date = now.toISOString();
+  }
+  editorPost.updatedDate = now.toISOString();
+  if(editorPost.views === undefined) editorPost.views = 0;
+
+  const idx = posts.findIndex(p => p.id === editorPost.id);
+  if(idx >= 0) posts[idx] = editorPost; else posts.unshift(editorPost);
+  const saved = await savePosts();
+  if(!saved){ showToast('Could not save — the images might be too large.'); return; }
+
+  showToast(editorPost.status === 'scheduled' ? 'Post scheduled ✓' : 'Post published successfully ✓');
+  navigateAdmin('posts');
+}
+
+/* ===================== PREVIEW ===================== */
+function renderPreviewView(){
+  collectEditorData();
+  document.getElementById('adminMain').innerHTML = `
+    <button class="btn btn-ghost btn-sm" style="margin-bottom:16px;" data-action="back-to-editor">← Back to Editor</button>
+    <div style="background:#fff;border:1px solid var(--admin-line);border-radius:8px;padding:24px;max-width:760px;">
+      ${renderFullPost(editorPost, {showRelated:true})}
+    </div>
+  `;
+}
+
+/* ===================== GLOBAL EVENT DELEGATION ===================== */
+document.addEventListener('click', async (e) => {
+  const navEl = e.target.closest('[data-nav]');
+  if(navEl && isAdmin){ navigateAdmin(navEl.dataset.nav); return; }
+
+  const el = e.target.closest('[data-action]');
+  if(!el) return;
+  const action = el.dataset.action;
+
+  if(action === 'go-public'){ e.preventDefault(); renderHome(); }
+  else if(action === 'logout'){ exitAdmin(); }
+  else if(action === 'edit-post'){
+    const post = posts.find(p => p.id === el.dataset.id);
+    if(post) navigateAdmin('editor', post);
+  }
+  else if(action === 'delete-post'){
+    const post = posts.find(p => p.id === el.dataset.id);
+    if(post && confirm(`Are you sure you want to delete this post?\n"${post.title}"`)){
+      posts = posts.filter(p => p.id !== post.id);
+      await savePosts();
+      renderPostsListView.name && (currentView==='dashboard' ? renderDashboard() : renderPostsListView());
+    }
+  }
+  else if(action === 'quick-toggle'){
+    const post = posts.find(p => p.id === el.dataset.id);
+    if(post){
+      post.status = post.status === 'published' ? 'draft' : 'published';
+      post.scheduledDate = null;
+      await savePosts();
+      currentView==='dashboard' ? renderDashboard() : renderPostsListView();
+    }
+  }
+  else if(action === 'add-category'){
+    const input = document.getElementById('newCategoryInput');
+    const val = input.value.trim();
+    if(!val) return;
+    if(categories.includes(val)){ alert('This category already exists.'); return; }
+    categories.push(val);
+    await saveCategories();
+    renderCategories();
+  }
+  else if(action === 'delete-category'){
+    const cat = el.dataset.cat;
+    if(confirm(`Delete the "${cat}" category?`)){
+      categories = categories.filter(c => c !== cat);
+      await saveCategories();
+      renderCategories();
+    }
+  }
+  else if(action === 'delete-media'){
+    if(confirm('Remove this image from the Media library?')){
+      media = media.filter(m => m.id !== el.dataset.id);
+      await saveMedia();
+      renderMedia();
+    }
+  }
+  else if(action === 'export-data'){ exportData(); }
+  else if(action === 'save-site-settings'){
+    siteSettings.authorName = document.getElementById('setAuthorName').value.trim() || siteSettings.authorName;
+    siteSettings.tagline = document.getElementById('setTagline').value.trim() || siteSettings.tagline;
+    await saveSettings();
+    document.getElementById('siteTagline').textContent = siteSettings.tagline;
+    showToast('Settings saved ✓');
+  }
+  else if(action === 'change-password'){
+    const cur = document.getElementById('curPassword').value;
+    const nw = document.getElementById('newPassword').value;
+    const conf = document.getElementById('confirmPassword').value;
+    if(cur !== adminPassword){ alert('Current password is incorrect.'); return; }
+    if(!nw || nw.length < 4){ alert('New password must be at least 4 characters.'); return; }
+    if(nw !== conf){ alert('New passwords do not match.'); return; }
+    adminPassword = nw;
+    await savePasswordToStorage();
+    showToast('Password changed ✓');
+    document.getElementById('curPassword').value='';
+    document.getElementById('newPassword').value='';
+    document.getElementById('confirmPassword').value='';
+  }
+  else if(action === 'open-post-settings'){ openPostSettingsPanel(); }
+  else if(action === 'close-post-settings'){ closePostSettingsPanel(); }
+  else if(action === 'add-product-row'){
+    document.getElementById('productsWrap').insertAdjacentHTML('beforeend', buildProductRowHtml(null));
+  }
+  else if(action === 'remove-product-row'){
+    el.closest('.product-row').remove();
+  }
+  else if(action === 'pick-featured-from-media'){ openMediaPicker('featured'); }
+  else if(action === 'remove-featured-image'){
+    editorPost.featuredImage = null;
+    document.getElementById('spFeaturedPreview').style.display = 'none';
+    openPostSettingsPanel();
+  }
+  else if(action === 'pick-media'){
+    const item = media.find(m => m.id === el.dataset.id);
+    if(!item) return;
+    if(mediaPickerTarget === 'canvas'){
+      withCanvasFocus(() => document.execCommand('insertImage', false, item.dataUrl));
+    } else if(mediaPickerTarget === 'featured'){
+      editorPost.featuredImage = item.dataUrl;
+      const prev = document.getElementById('spFeaturedPreview');
+      if(prev){ prev.src = item.dataUrl; prev.style.display = 'block'; }
+    }
+    closeMediaPicker();
+  }
+  else if(action === 'close-media-picker'){ closeMediaPicker(); }
+  else if(action === 'open-preview'){ navigateAdmin('preview'); }
+  else if(action === 'back-to-editor'){ navigateAdmin('editor', editorPost); }
+  else if(action === 'save-draft'){ handleSaveDraft(); }
+  else if(action === 'publish-post'){ handlePublish(); }
+  else if(action === 'submit-comment'){ submitComment(el.dataset.postId); }
+  else if(action === 'approve-comment'){ await updateCommentStatus(el.dataset.postId, el.dataset.id, 'approved'); renderAdminComments(); }
+  else if(action === 'reject-comment'){ await updateCommentStatus(el.dataset.postId, el.dataset.id, 'rejected'); renderAdminComments(); }
+  else if(action === 'delete-comment'){
+    if(confirm('Delete this comment permanently?')){
+      await deleteCommentAdmin(el.dataset.postId, el.dataset.id);
+      renderAdminComments();
+    }
+  }
+  else if(action === 'go-wishlist'){ e.preventDefault(); renderWishlistPage(); }
+  else if(action === 'toggle-wish'){
+    e.preventDefault();
+    toggleWish(el.dataset.postId, el.dataset.idx, el.dataset.name, el.dataset.price, el.dataset.image || '');
+  }
+  else if(action === 'remove-wish'){
+    e.preventDefault();
+    toggleWish(el.dataset.postId, el.dataset.idx, el.dataset.name, el.dataset.price, el.dataset.image || '');
+  }
+  else if(action === 'share-copy'){
+    e.preventDefault();
+    copyShareLink(el.dataset.url);
+  }
+  else if(action === 'share-whatsapp'){
+    e.preventDefault();
+    window.open('https://wa.me/?text=' + encodeURIComponent(el.dataset.title + ' ' + el.dataset.url), '_blank', 'noopener');
+  }
+  else if(action === 'share-twitter'){
+    e.preventDefault();
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(el.dataset.title) + '&url=' + encodeURIComponent(el.dataset.url), '_blank', 'noopener');
+  }
+  else if(action === 'share-facebook'){
+    e.preventDefault();
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(el.dataset.url), '_blank', 'noopener');
+  }
+  else if(action === 'share-native'){
+    e.preventDefault();
+    nativeShare(el.dataset.title, el.dataset.url);
+  }
+});
+
+document.getElementById('editorTitleInput')?.addEventListener('input', () => {});
+document.addEventListener('input', (e) => {
+  if(e.target.id === 'editorTitleInput' && !slugManuallyEdited){
+    const spSlug = document.getElementById('spSlug');
+    if(spSlug) spSlug.value = slugify(e.target.value);
+  }
+});
+
+document.getElementById('adminOverlay').addEventListener('click', closeDrawer);
+document.getElementById('spOverlay').addEventListener('click', closePostSettingsPanel);
+
+/* ===================== LOGIN / FAB / HEADER ICONS ===================== */
+function updateTopLevelUI(){
+  const btn = document.getElementById('adminBtn');
+  const fab = document.getElementById('fabBtn');
+  if(isAdmin){
+    btn.textContent = 'Admin Mode On — Logout';
+    btn.classList.add('is-active');
+    fab.style.display = 'flex';
+  } else {
+    btn.textContent = 'Admin Login';
+    btn.classList.remove('is-active');
+    fab.style.display = 'none';
+  }
+}
+
+document.getElementById('adminBtn').addEventListener('click', () => {
+  if(isAdmin){ exitAdmin(); return; }
+  const entered = prompt('Enter admin password:');
+  if(entered === null) return;
+  if(entered !== adminPassword){ alert('Incorrect password.'); return; }
+  isAdmin = true;
+  updateTopLevelUI();
+  enterAdmin('dashboard');
+});
+
+document.getElementById('darkModeBtn').addEventListener('click', toggleDarkMode);
+
+document.getElementById('fabBtn').addEventListener('click', () => {
+  if(!isAdmin) return;
+  enterAdmin('dashboard');
+});
+
+document.getElementById('helpIconBtn').addEventListener('click', () => {
+  alert('Help:\n\n• View all stats from the Dashboard.\n• Start writing with "New Post", apply formatting from the toolbar.\n• Use the "Settings" (⚙️) button to add category, image, SEO and products.\n• Use "Save Draft" to save your work, "Publish" to make it live.\n• Entering a future date and publishing will schedule the post for that date.');
+});
+
+document.getElementById('accountIconBtn').addEventListener('click', (e) => {
+  e.stopPropagation();
+  document.getElementById('accountMenu').classList.toggle('open');
+});
+document.addEventListener('click', (e) => {
+  if(!e.target.closest('#accountIconBtn') && !e.target.closest('#accountMenu')){
+    document.getElementById('accountMenu').classList.remove('open');
+  }
+});
+
+loadAll();
+</script>
+
+<script id="phase-1-4-enhancements">
+(function(){
+  'use strict';
+
+  // Prevent accidental loss while editing.
+  let autosaveTimer = null;
+  let dirty = false;
+  const markDirty = () => {
+    dirty = true;
+    const el = document.querySelector('.editor-status');
+    if(el){ el.textContent = '● Unsaved changes'; el.classList.add('unsaved'); el.classList.remove('saved'); }
+    clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(() => {
+      const save = document.querySelector('[data-action="save-draft"]');
+      if(save && typeof window.handleSaveDraft === 'function') save.click();
+    }, 1800);
+  };
+
+  document.addEventListener('input', (event) => {
+    if(event.target.closest('#adminMain') || event.target.matches('[contenteditable="true"]')) markDirty();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's'){
+      event.preventDefault();
+      const save = document.querySelector('[data-action="save-draft"]');
+      if(save) save.click();
+    }
+  });
+
+  window.addEventListener('beforeunload', (event) => {
+    if(dirty){ event.preventDefault(); event.returnValue = ''; }
+  });
+
+  // Accessible confirmation for destructive actions.
+  document.addEventListener('click', (event) => {
+    const target = event.target.closest('[data-confirm]');
+    if(target && !confirm(target.getAttribute('data-confirm'))){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }, true);
+
+  // Add a compact admin help panel without changing the public design.
+  function addAdminHelp(){
+    if(document.getElementById('phaseHelp')) return;
+    const main = document.getElementById('adminMain');
+    if(!main) return;
+    const notice = document.createElement('div');
+    notice.id = 'phaseHelp';
+    notice.className = 'phase-notice';
+    notice.innerHTML = '<strong>CMS Shortcuts:</strong> Ctrl + S to Save Draft · Changes in the editor will try to auto-save · Use the menu button on mobile to open all sections.';
+    main.prepend(notice);
+  }
+
+  // Patch the existing navigation function safely so every admin screen gets the help hint.
+  const originalNavigate = window.navigateAdmin;
+  if(typeof originalNavigate === 'function'){
+    window.navigateAdmin = function(){
+      const result = originalNavigate.apply(this, arguments);
+      setTimeout(addAdminHelp, 0);
+      return result;
+    };
+  }
+
+  // Warn about the limitations of client-only admin authentication.
+  const originalPrompt = window.prompt;
+  const adminButton = document.getElementById('adminBtn');
+  if(adminButton && !document.getElementById('securityNotice')){
+    const n = document.createElement('small');
+    n.id = 'securityNotice';
+    n.style.cssText = 'display:block;max-width:420px;margin:4px 12px;color:#6b7280;font-size:11px';
+    n.textContent = 'Note: This is a demo/browser CMS. Real security requires server-side authentication and a database.';
+    adminButton.parentElement && adminButton.parentElement.appendChild(n);
+  }
+
+  // Keep dirty state accurate after explicit save/publish clicks.
+  document.addEventListener('click', (event) => {
+    const action = event.target.closest('[data-action]');
+    if(action && ['save-draft','publish-post'].includes(action.dataset.action)){
+      setTimeout(() => {
+        dirty = false;
+        const el = document.querySelector('.editor-status');
+        if(el){ el.textContent = '✓ Saved'; el.classList.add('saved'); el.classList.remove('unsaved'); }
+      }, 350);
+    }
+  });
+
+  // Basic migration: ensure missing post fields do not break rendering.
+  window.phaseNormalizePosts = function(list){
+    if(!Array.isArray(list)) return [];
+    return list.map(post => Object.assign({
+      id: 'post-' + Math.random().toString(36).slice(2),
+      title: 'Untitled',
+      slug: '',
+      status: 'draft',
+      category: '',
+      labels: [],
+      content: '',
+      excerpt: '',
+      featuredImage: '',
+      products: [],
+      seoTitle: '',
+      seoDescription: '',
+      views: 0,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    }, post || {}));
+  };
+})();
+</script>
+
+</body>
+</html>
